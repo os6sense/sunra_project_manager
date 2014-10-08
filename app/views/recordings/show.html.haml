@@ -1,0 +1,35 @@
+- model_class = Recording
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p{:id => "notice"}
+  =notice
+
+%dl{:class => "dl-horizontal"}
+  %dt
+    %strong= "Project"
+    %dd= @recording.booking.project.project_name
+  %dt
+    %strong= "Date:"
+    %dd= @recording.booking.date
+  %dt
+  %dt
+    %strong= "Start:"
+    %dd=@recording.start_time.strftime "%H:%M:%S"
+  %dt
+    %strong= "End:"
+    %dd= @recording.end_time != nil ? @recording.end_time.strftime("%H:%M:%S") : "--:--:--"
+  %dt
+    %strong= "Group Number:"
+    %dd= @recording.group_number
+  %dt
+    %strong= "Base Filename:"
+    %dd= @recording.base_filename
+
+= render :template => 'recording_formats/index', :locals => {:no_header => true}
+
+= render :partial  => 'layouts/nav_form_actions',
+  :locals => {:t_class => "recording",
+  :path => @project ? [@project, @booking, @recording] : [@booking, @recording],
+  :root => @project ? [@project, @booking] : [:recordings] }

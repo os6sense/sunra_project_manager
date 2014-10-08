@@ -1,0 +1,28 @@
+one:
+  id: 1
+  booking_id: 1
+  start_time: 2014/01/14 12:20:00
+  end_time: 2014/01/14 14:20:00
+  group_number: 1
+  base_filename: 2014-01-14-142000
+two:
+  id: 2
+  booking_id: 1
+  start_time: 2014/01/14 15:00:00
+  end_time: 2014/01/14 17:00:00
+  group_number: 1
+  base_filename: 2014-01-14-150000
+three:
+  id: 3
+  booking_id: 1
+  start_time: 2014/01/14 18:00:00
+  end_time: 2014/01/14 20:00:00
+  group_number: 1
+  base_filename: 2014-01-14-180000
+four:
+  id: 4
+  booking_id: 2
+  start_time: 2014/01/14 18:00:00
+  end_time: 2014/01/14 20:00:00
+  group_number: 1
+  base_filename: 2014-01-14-180000

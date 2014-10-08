@@ -1,0 +1,27 @@
+<%= simple_form_for(@booking_company) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :company_name %>
+  </div>
+
+  <h2>Add Contacts</h2>
+  <div class="items form-horizontal">
+    <%= f.nested_fields_for :booking_contacts do |f| %>
+      <fieldset class="item">
+        <%= f.label :name %>
+        <%= f.text_field :contact_name %>
+
+        <a href="#" class="remove btn btn-danger">remove</a>
+
+        <%= f.hidden_field :id %>
+        <%= f.hidden_field :_destroy %>
+      </fieldset>
+    <% end %>
+  </div>
+  <a href="#" class="add btn">+ add new contact</a>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn btn-primary" %>
+  </div>
+<% end %>

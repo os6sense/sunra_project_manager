@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Group:</b>
+  <%= @distribution_audit.group_id %>
+</p>
+
+<p>
+  <b>Format:</b>
+  <%= @distribution_audit.format_id %>
+</p>
+
+<p>
+  <b>Email address:</b>
+  <%= @distribution_audit.email_address %>
+</p>
+
+<p>
+  <b>Emailed at:</b>
+  <%= @distribution_audit.emailed_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_distribution_audit_path(@distribution_audit) %> |
+<%= link_to 'Back', distribution_audits_path %>

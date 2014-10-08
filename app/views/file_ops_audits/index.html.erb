@@ -1,0 +1,29 @@
+<h1>Listing file_ops_audits</h1>
+
+<table>
+  <tr>
+    <th>Group</th>
+    <th>Format</th>
+    <th>Encrypted at</th>
+    <th>Uploaded at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @file_ops_audits.each do |file_ops_audit| %>
+  <tr>
+    <td><%= file_ops_audit.group_id %></td>
+    <td><%= file_ops_audit.format_id %></td>
+    <td><%= file_ops_audit.encrypted_at %></td>
+    <td><%= file_ops_audit.uploaded_at %></td>
+    <td><%= link_to 'Show', file_ops_audit %></td>
+    <td><%= link_to 'Edit', edit_file_ops_audit_path(file_ops_audit) %></td>
+    <td><%= link_to 'Destroy', file_ops_audit, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New File ops audit', new_file_ops_audit_path %>

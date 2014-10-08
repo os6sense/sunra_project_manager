@@ -1,0 +1,17 @@
+- model_class = Project
+.page-header
+  %h1= SunraRestApi::Application::config.studio_name
+
+  %h2 
+    %span= Date.today
+    %span= Time.now.strftime("%I:%M:%S %z")
+
+= simple_form_for @project, :html => {:class => 'form-inline'} do |f|
+  = render "layouts/errors", :object => @project
+
+  = f.input :client_name, :label => "Client Name"
+  = f.input :project_name, :label => 'Project Name'
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-success'
+    = link_to "Cancel", :back, :class => 'btn btn-danger'

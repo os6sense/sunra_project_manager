@@ -1,0 +1,17 @@
+= simple_form_for [@project, @booking, @recording, @recording_format] do |f|
+  = render "layouts/errors", :object => @recording_format
+
+  = f.input :format
+  = f.input :directory
+  = f.input :filesize
+  = f.input :start_time
+  = f.input :end_time
+  = f.input :sha1hash
+  = f.input :upload
+  = f.input :copy
+  = f.input :encrypt
+  = f.input :fixed_moov_atom
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-success'
+    = link_to "Cancel", :back, :class => 'btn btn-danger'

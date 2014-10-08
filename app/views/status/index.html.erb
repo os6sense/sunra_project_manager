@@ -1,0 +1,14 @@
+<div id="status" >
+<h4 ><%= l DateTime.now, :format => '%Y-%m-%d %H:%M:%S' %></h4>&nbsp;
+<h1 >STUDIO: <%= SunraRestApi::Application::config.studio_name %></h1>
+	<table class="table table-striped" id="project">
+	    <% @projects.each do |project| %>
+	    <tr>
+			<td><%= link_to project.uuid, project_path(project) %></td>
+			<td><%= l project.start, :format => "%H:%M" %></td> 
+			<td><%= l project.end, :format => "%H:%M" %></td>
+			<td><%= project.project_name %></td>
+	     </tr>
+	    <% end %>
+	</table>
+</div>

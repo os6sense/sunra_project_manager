@@ -1,0 +1,35 @@
+- model_class = RecordingFormat
+
+- unless defined?(no_header)
+  .page-header
+    %h1= t '.title', :default => model_class.model_name.human.pluralize
+- else
+  %h5= t '.title', :default => model_class.model_name.human.pluralize
+
+%table{:class => "table table-striped"}
+  %thead
+    %tr
+      %th Format:
+      %th Directory:
+      %th Filesize
+      %th Upload
+      %th Copy
+      %th Encrypt
+      %th= t '.actions', :default => t("helpers.actions")
+
+    - @recording_formats = [] if @recording_formats.nil?
+    - @recording_formats.each do |fmt|
+      %tr
+        %td= fmt.format
+        %td= fmt.directory
+        %td= fmt.filesize
+        %td= fmt.upload
+        %td= fmt.copy
+        %td= fmt.encrypt
+        %td= render :partial  => 'layouts/rec_form_actions',
+            :locals => {:t_class => "recording_format", :path => [@project, @booking, @recording, fmt]}
+
+= link_to 'New Format',
+    polymorphic_path([:new, @project, @booking, @recording, :recording_format]),
+    :class => 'btn btn-mini btn-success' if @project
+

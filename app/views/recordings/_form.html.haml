@@ -1,0 +1,31 @@
+= simple_form_for [@project, @booking, @recording] do |f|
+  = render "layouts/errors", :object => @recording
+  .items
+    %fieldset{:class => "item"}
+      .input-append{:id=>"recordingstarttimepicker"}
+        = f.label "Start Time"
+        = f.input_field :start_time, :as => :string, "data-format" => "hh:mm:ss",
+          :value => @recording.start_time ? @recording.start_time.strftime("%H:%M:%S") : "17:00:00"
+
+        %span{:class=>"add-on"}
+          %i{'data-time-icon' => "icon-time", 'data-date-icon' => 'icon-calendar'}
+
+      .input-append{:id=>"recordingendtimepicker"}
+        = f.label "End Time"
+        = f.input_field :end_time, :as => :string, "data-format" => "hh:mm:ss",
+          :value => @recording.end_time ? @recording.end_time.strftime("%H:%M:%S") : "17:00:00"
+
+        %span{:class=>"add-on"}
+          %i{'data-time-icon' => "icon-time", 'data-date-icon' => 'icon-calendar'}
+
+      = f.input :group_number
+      = f.input :base_filename
+      :javascript
+        $(function() {
+          $('#recordingstarttimepicker').datetimepicker({ pickDate: false, pickSeconds: true  });
+          $('#recordingendtimepicker').datetimepicker({ pickDate: false, pickSeconds: true});
+        });
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-success'
+    = link_to "Cancel", :back, :class => 'btn btn-danger'

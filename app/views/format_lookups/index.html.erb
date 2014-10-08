@@ -1,0 +1,23 @@
+<h1>Listing format_lookups</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @format_lookups.each do |format_lookup| %>
+  <tr>
+    <td><%= format_lookup.name %></td>
+    <td><%= link_to 'Show', format_lookup %></td>
+    <td><%= link_to 'Edit', edit_format_lookup_path(format_lookup) %></td>
+    <td><%= link_to 'Destroy', format_lookup, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Format lookup', new_format_lookup_path %>

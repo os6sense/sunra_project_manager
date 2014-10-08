@@ -1,0 +1,14 @@
+= simple_form_for [@project, @client_login], url: "/projects/#{@project.uuid}/client_login" do |f|
+  = render "layouts/errors", :object => @client_login
+
+  %h2 Login Email/Password
+  .groupbox{:id => "authentication_details"}
+    %p The following authentication details will be used for the client to login and download MP3 audio and MP4 video from our secure website. They can be set at anypoint up until the sessions are uploaded to our webserver. If no details are given a default set of credentials will be generated at upload.
+    %p
+      %strong NOTE: After sessions have been uploaded to the server you cannot change the password
+    = f.input :login_email, :label => "Login", :hint => "Please use a valid email address for the login field."
+    = f.input :password, :as => :string
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-success'
+    = link_to "Cancel", :back, :class => 'btn btn-danger'

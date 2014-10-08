@@ -1,0 +1,46 @@
+= simple_form_for @booking do |f| %>
+  = f.error_notification
+
+  %h2= "Booking Dates"
+  .items
+    = f.input :facility_studio, :collection => StudioLookup.all,
+      :label => "Studio"#, :default => StudioLookup.first.studio_name
+
+    .input-append{:id => "bookingdatepicker"}
+      = f.input_field :date, :as => :string, :label => "Date", "data-format" => "yyyy-MM-dd"
+      %span{:class=>"add-on"}
+        %i{'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+
+    .input-append{:id=>"bookingstarttimepicker"}
+      = f.input_field :start_time, :as => :string,
+        :label => "Start Time", :size => 30 , "data-format" => "hh:mm:ss PP"
+
+      %span{:class=>"add-on"}
+        %i{'data-time-icon' => "icon-time", 'data-date-icon' => 'icon-calendar'}
+
+    .input-append{:id=>"bookingendtimepicker"}
+      = f.input_field :end_time, :as => :string, :label => "End Time", "data-format" => "hh:mm PP"
+      %span{:class=>"add-on"}
+        %i{'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
+
+    = f.input :availability_notes, :label => "Availability Notes", :input_html => {:rows => 4, :cols => 80}
+
+    :javascript
+      $(function() {
+        $('#bookingdatepicker').datetimepicker({ pickTime: false });
+        $('#bookingstarttimepicker').datetimepicker({ pickDate: false, pickSeconds: false  });
+        $('#bookingendtimepicker').datetimepicker({ pickDate: false, pickSeconds: false});
+      });
+
+  %a{:href => "#", :class => "remove"}
+    Remove
+
+  =# f.hidden_field :id
+  =# f.hidden_field :_destroy
+
+  %a{:href => "#", :class => "add"}
+    Add New Booking
+  =# f.input :uuid, :as => :hidden
+
+  .form-actions
+    = f.button :submit

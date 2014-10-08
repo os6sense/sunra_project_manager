@@ -1,0 +1,37 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  helpers:
+    actions: "Actions"
+    links:
+      back: "Back"
+      cancel: "Cancel"
+      confirm: "Are you sure?"
+      destroy: "Delete"
+      new: "New"
+      edit: "Edit"
+      show: "Show"
+      project:
+        new: "Create New Project"
+        edit: "Edit Project"
+        destroy: "Delete Project"
+        back: "Back"
+        show: "Show"
+      booking:
+        new: "Create New Booking"
+        edit: "Edit Booking"
+        destroy: "Delete Booking"
+        back: "Back"
+        show: "Show"
+      recording:
+        new: "Create New Recording"
+        edit: "Edit Recording"
+        destroy: "Delete Recording"
+        back: "Back"
+        show: "Show"
+    titles:
+      edit: "Edit"
+      save: "Save"
+      new: "New"
+      delete: "Delete"

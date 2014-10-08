@@ -1,0 +1,23 @@
+<h1>Listing booking_contact_details</h1>
+
+<table>
+  <tr>
+    <th>Email or phone</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @booking_contact_details.each do |booking_contact_detail| %>
+  <tr>
+    <td><%= booking_contact_detail.email_or_phone %></td>
+    <td><%= link_to 'Show', booking_contact_detail %></td>
+    <td><%= link_to 'Edit', edit_booking_contact_detail_path(booking_contact_detail) %></td>
+    <td><%= link_to 'Destroy', booking_contact_detail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Booking contact detail', new_booking_contact_detail_path %>

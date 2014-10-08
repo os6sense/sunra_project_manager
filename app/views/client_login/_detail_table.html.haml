@@ -1,0 +1,18 @@
+%table{:class => "client_login table table-striped"}
+  %thead
+    %tr
+      - if not @project
+        %th= "Project Name"
+      %th= "Login"
+      %th= t '.actions', :default => t("helpers.actions")
+ 
+    - if @project
+      - logins = @project.client_login ? [@project.client_login] : []
+    - else
+      - logins = @clients_logins
+
+    - logins.each do |login|
+      %tr
+        %td= login.login_email
+        %td= render :partial  => 'layouts/rec_form_actions',
+            :locals => {:t_class => "recording_format", :path => [@project, login]}

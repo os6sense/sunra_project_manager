@@ -1,0 +1,55 @@
+
+html { background-color: grey; }
+
+.float { float: left; }
+
+.spin_control {
+  float: left;
+  background-size: 45px 45px;
+  background-repeat: no-repeat;
+  width: 45px; 
+  height: 45px;
+}
+
+.up {
+  background-image:url("../../images/up.gif"); 
+}
+
+.down {
+  background-image:url("../../images/down.gif"); 
+}
+
+.seperator {
+  font-size: 50px;
+  width:10px;
+  margin-left: 10px;
+  margin-top: 35px;
+  height: 100px; 
+
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.time_divider {
+  float: left;
+  width: 100px;
+  height: 135px;
+}
+
+.hour{ width: 40px; height:45px; margin-left: 0px; color: blue;}
+.t_min{ width: 40px; height: 45px; margin-left: 10px; color: blue;}
+.z_min{ width: 40px; height: 45px;  margin-left: 10px; color: blue;}
+
+input[type="number"]{
+  background-color: inherit;
+  width: 45px;
+  height: 40px;
+  border: 0px;
+  text-align: center;
+  font-size: 28px;
+}

@@ -1,0 +1,38 @@
+- model_class = RecordingFormat
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p{:id => "notice"}
+  =notice
+
+%dl{:class => "dl-horizontal"}
+  %div
+    %dt
+      %strong= "Format:"
+      %dd= @recording_format.format
+  %div
+    %dt
+      %strong= "Directory:"
+      %dd=@recording_format.directory
+  %div
+    %dt
+      %strong= "Filesize:"
+      %dd= @recording_format.filesize
+  %div
+    %dt
+      %strong= "Upload:"
+      %dd= @recording_format.upload
+  %div
+    %dt
+      %strong= "Copy:"
+      %dd= @recording_format.copy
+  %div
+    %dt
+      %strong= "Encrypt:"
+      %dd= @recording_format.encrypt
+
+= render :partial  => 'layouts/nav_form_actions',
+  :locals => {:t_class => "recording_format",
+  :path => @project ? [@project, @booking, @recording, @recording_format] : [@recording, @recording_format],
+  :root => @project ? [@project, @booking, @recording] : [:recording_formats] }

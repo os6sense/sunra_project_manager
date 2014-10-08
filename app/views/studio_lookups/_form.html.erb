@@ -1,0 +1,17 @@
+<%= simple_form_for(@studio_lookup) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :id, :label => 'id' %>
+    <%= f.input :facility_name, :label => 'facility' %>
+    <%= f.input :studio_name, :label => 'Studio Name' %>
+    <%= f.input :mdns_localname, :label => 'mDNS Local Name' %>
+    <%= f.input :ip_fallback, :label => 'IP Fallback' %>
+    <%= f.input :phone, :label => 'Phone No#'%>
+    <%= f.input :active,  :label => 'Active?' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

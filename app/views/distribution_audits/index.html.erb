@@ -1,0 +1,29 @@
+<h1>Listing distribution_audits</h1>
+
+<table>
+  <tr>
+    <th>Group</th>
+    <th>Format</th>
+    <th>Email address</th>
+    <th>Emailed at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @distribution_audits.each do |distribution_audit| %>
+  <tr>
+    <td><%= distribution_audit.group_id %></td>
+    <td><%= distribution_audit.format_id %></td>
+    <td><%= distribution_audit.email_address %></td>
+    <td><%= distribution_audit.emailed_at %></td>
+    <td><%= link_to 'Show', distribution_audit %></td>
+    <td><%= link_to 'Edit', edit_distribution_audit_path(distribution_audit) %></td>
+    <td><%= link_to 'Destroy', distribution_audit, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Distribution audit', new_distribution_audit_path %>

@@ -1,0 +1,20 @@
+%table{:class => "table "}
+  %thead
+    %tr
+      %th Project
+      %th Date
+      %th Start
+      %th End
+      %th Studio
+      %th= t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @bookings.each do |booking|
+      %tr
+        %td= booking.project.project_name
+        %td= booking.date
+        %td= booking.start_time.strftime "%H:%M"
+        %td= booking.end_time.strftime "%H:%M"
+        %td= StudioLookup.find(booking.facility_studio).studio_name
+        %td
+          = render :partial  => 'layouts/rec_form_actions',
+            :locals => {:t_class => "booking", :path => [@project, booking]}

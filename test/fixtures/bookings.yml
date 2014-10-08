@@ -1,0 +1,24 @@
+one:
+  id: 1
+  project_id: poewripewojrjo34jp32j4p324j342342klggre
+  facility_studio: 2
+  date: 2014/10/10
+  start_time: 2014/10/10 12:00:00
+  end_time: 2014/10/10 23:00:00
+  availability_notes: Blah blah blah
+two:
+  id: 2
+  project_id: 342klmklg4lkrklgnerlgnlergnelrgnelrgre
+  facility_studio: 3
+  date: 2014/01/14
+  start_time: 2014/01/14 12:00:00
+  end_time: 2014/01/14 22:00:00
+  availability_notes: Blah blah blah
+three:
+  id: 3
+  project_id: Xxx342klmklg4lkrklgnerlgnlergnelrgnelrgre
+  facility_studio: 3
+  date: 2014/01/15
+  start_time: 2014/01/15 12:00:00
+  end_time: 2014/01/15 22:00:00
+  availability_notes: Blah blah blah

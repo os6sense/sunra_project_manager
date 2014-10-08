@@ -1,0 +1,11 @@
+
+bundle install
+rake db:migrate
+
+edit seed file with any admin users, names of studios and media formats.
+
+run rails r dump_api_keys.rb
+
+usin one of the api_keys listed add it to /etc/sunra/config.yml
+specify the studio id which matches that in the seed file
+

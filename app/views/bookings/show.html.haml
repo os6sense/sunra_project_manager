@@ -1,0 +1,31 @@
+- model_class = Booking
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p{:id => "notice"}
+  =notice
+
+%dl{:class => "dl-horizontal"}
+  %dt
+    %strong= "Project:"
+    %dd=@booking.project.project_name
+  %dt
+    %strong= "Date:"
+    %dd= @booking.date
+  %dt
+    %strong= "Start Time:"
+    %dd= @booking.start_time #.strftime "%H:%M"
+  %dt
+    %strong= "End Time:"
+    %dd= @booking.end_time #.strftime "%H:%M"
+  %dt
+    %strong= "Studio:"
+    %dd= StudioLookup.find(@booking.facility_studio).studio_name
+
+= render :template => 'recordings/index', :locals => {:no_header => true}
+
+= render :partial  => 'layouts/nav_form_actions',
+  :locals => {:t_class => "booking",
+  :path => [@project, @booking],
+  :root =>[@project ? @project : :bookings] }

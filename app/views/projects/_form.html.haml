@@ -1,0 +1,9 @@
+= simple_form_for @project, :html => {:class => 'form-inline'} do |f|
+  = render "layouts/errors", :object => @project
+
+  = f.input :client_name, :label => "Client Name"
+  = f.input :project_name, :label => 'Project Name'
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-success'
+    = link_to "Cancel", :back, :class => 'btn btn-danger'

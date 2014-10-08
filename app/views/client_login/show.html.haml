@@ -1,0 +1,38 @@
+- model_class = ClientLogin
+
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human
+
+%p{:id => "notice"}
+  =notice
+
+%dl{:class => "dl-horizontal"}
+  %div
+    %dt
+      %strong= "Project ID:"
+      %dd= @client_login.project_id
+  %div
+    %dt
+      %strong= "Project Name:"
+      %dd= @client_login.project.project_name
+  %div
+    %dt
+      %strong= "Login:"
+      %dd= @client_login.login_email
+  %div
+    %dt
+      %strong= "Password Digest:"
+      %dd=@client_login.password_digest
+  %div
+    %dt
+      %strong= "Recoverable Password:"
+      %dd= @client_login.recoverable
+  %div
+    %dt
+      %strong= "Recovery Key:"
+      %dd= @client_login.key_name
+
+= render :partial  => 'layouts/nav_form_actions',
+  :locals => {:t_class => "recording_format",
+  :path => @project ? [@project, @client_login] : [@client_login],
+  :root => @project ? [@project ] : [:client_login] }

@@ -1,0 +1,19 @@
+- model_class = Booking
+
+- unless defined?(no_header)
+  .page-header
+    %h1= t '.title', :default => model_class.model_name.human.pluralize
+- else
+  %h5= t '.title', :default => model_class.model_name.human.pluralize
+  %p= "No bookings exist for this project" if @bookings.size == 0
+- if @bookings.size > 0
+  = render :template => "bookings/_index_detail_table", :locals => {:no_header => true}
+
+  =will_paginate(@bookings, :style => "color:blue;float:right;")
+
+-# Unless the user is looking at the bookings via the /project
+-# path we cant create a new booking since a booking MUST be assigned
+-# To a project
+= link_to 'Create A New Booking',
+    polymorphic_path([:new, @project, :booking]),
+    :class => 'btn btn-mini btn-success' if @project

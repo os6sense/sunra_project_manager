@@ -1,0 +1,15 @@
+- model_class = ClientLogin
+
+- unless defined?(no_header)
+  .page-header
+    %h1= t '.title', :default => model_class.model_name.human.pluralize
+- else
+  %h5= t '.title', :default => model_class.model_name.human.pluralize
+  %p= "No Logins Exist For This Project" if not @project.client_login
+  %p= "Please note that a project may only have a *single* login for a client" if @project.client_login
+
+= render :template => 'client_login/_detail_table' if @project.client_login
+
+= link_to 'New Client Login',
+    polymorphic_path([:new, @project, :client_login]),
+    :class => 'btn btn-mini btn-success' if @project and not @project.client_login
