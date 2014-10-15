@@ -44,6 +44,8 @@ class RecordingFormatsController < ApplicationController
 
     @recording_format =
       @recording.recording_formats.new(params[:recording_format])
+
+    # NB: Bug with format not being set - fixed in model
     @recording_format.fix_format(params[:recording_format][:format])
 
     respond_to do |format|

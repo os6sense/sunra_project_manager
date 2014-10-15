@@ -38,12 +38,15 @@ class RecordingFormat < ActiveRecord::Base
   # representation e.g. 'mpg' or 'MPG' or '2'. On save is too late to fix
   # this
   def fix_format(fmt_string)
+    # NB: Bug with format not being set on deployed system @format worked
+    # fine in development but self.format was required on deployed system.
+    #
     if fmt_string.to_i > 0
-      @format = fmt_string.to_i
+      self.format = fmt_string.to_i
     elsif (ext = FormatLookup.where(extension: fmt_string.upcase)[0])
-      @format = ext[:id]
+      self.format = ext[:id]
     else
-      @format = 0
+      self.format = 0
     end
   end
 

@@ -20,7 +20,7 @@
     - @recording_formats = [] if @recording_formats.nil?
     - @recording_formats.each do |fmt|
       %tr
-        %td= fmt.format
+        %td= FormatLookup.where(id: fmt.format)[0][:extension]
         %td= fmt.directory
         %td= fmt.filesize
         %td= fmt.upload
