@@ -7,6 +7,7 @@ class CreateBookings < ActiveRecord::Migration
       t.date :date, :null => false
       t.datetime :start_time, :null => false
       t.datetime :end_time, :null => false
+      t.boolean :webcast, :default => false
 	    t.text :availability_notes
 
       t.timestamps
