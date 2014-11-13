@@ -22,6 +22,9 @@
   %dt
     %strong= "Studio:"
     %dd= StudioLookup.find(@booking.facility_studio).studio_name
+  %dt
+    %strong= Webcast?:"
+    %dd= @booking.webcast 
 
 = render :template => 'recordings/index', :locals => {:no_header => true}
 

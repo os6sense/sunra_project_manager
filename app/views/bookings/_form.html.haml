@@ -37,6 +37,8 @@
           %i{'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
         = f.error :end_time
 
+      = f.label "Webcast?"
+      = f.check_box :webcast
       = f.input :availability_notes, :label => "Availability Notes",
           :input_html => {:rows => 4, :cols => 80 }
 
