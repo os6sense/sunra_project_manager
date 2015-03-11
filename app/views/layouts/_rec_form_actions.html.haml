@@ -1,3 +1,4 @@
+
 = link_to t('.show', :default => t("helpers.links.#{t_class}.show")),
             polymorphic_path(path),
             :class => 'btn btn-mini btn-primary'
@@ -5,7 +6,7 @@
             edit_polymorphic_path(path),
             :class => 'btn btn-mini btn-warning'
 = link_to t('.destroy', :default => t("helpers.links.#{t_class}.destroy")),
-            polymorphic_path(path),
+            polymorphic_path(parent_path),
             :method => :delete,
             :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
             :class => 'btn btn-mini btn-danger'

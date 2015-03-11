@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   PER_PAGE = 20
 
-  # Description::
+  # ==== Description::
   # Simple token based authentication
   def authenticate_via_token
     if params[:auth_token].present?
@@ -20,12 +20,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Description:: 
+  # ==== Description::
   # DRY up basic responses
   def _simple_response r_obj, opts = {}
     respond_to do |format|
       format.html
-      format.json { 
+      format.json {
                     r_obj << { pagination: {
                        current_page: r_obj.current_page,
                        per_page: r_obj.per_page,
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Description:: 
+  # ==== Description::
   # DRY up destroy responses
   def _destroy_response p_url_array
     respond_to do |format|

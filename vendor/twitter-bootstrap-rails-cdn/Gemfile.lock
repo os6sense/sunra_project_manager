@@ -1,0 +1,14 @@
+PATH
+  remote: .
+  specs:
+    twitter-bootstrap-rails-cdn (1.1.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  twitter-bootstrap-rails-cdn!

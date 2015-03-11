@@ -25,9 +25,18 @@
         %td= recording.end_time != nil ? recording.end_time.strftime("%H:%M:%S") : "--:--:--"
         %td= recording.group_number
         %td= recording.base_filename
-        %td= render :partial  => 'layouts/rec_form_actions',
-            :locals => {:t_class => "recording", :path => [@project, @booking, recording]}
-
+        %td
+          = link_to "VIEW",
+                      polymorphic_path([@project, @booking, recording]),
+                      :class => 'btn btn-mini btn-primary'
+          = link_to "EDIT",
+                      edit_polymorphic_path([@project, @booking, recording]),
+                      :class => 'btn btn-mini btn-warning'
+          = link_to "DELETE",
+            polymorphic_path([@project, @booking]),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger'
 = link_to 'New Recording',
     polymorphic_path([:new, @project, @booking, :recording]),
     :class => 'btn btn-mini btn-success' if @project

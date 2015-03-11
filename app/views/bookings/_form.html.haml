@@ -1,52 +1,63 @@
-= simple_form_for [@project, @booking] do |f|
+= simple_form_for [@project, @booking], html: {class: 'form-horizontal well'} do |f|
+
   = render "layouts/errors", :object => @booking
 
   .items
-    %fieldset{:class => "item"}
-      = f.input :facility_studio,
-        :collection => StudioLookup.find(:all, :select => 'id, studio_name'),
-        :label_method => :studio_name,
-        :selected => 1,
-        :label => "Studio"
+    %fieldset{class: 'item'}
+      .form-inline
+        .form-group
+          .input-group
+            = f.input :facility_studio,
+              collection: StudioLookup.all_studio_names,
+              label_method: :studio_name,
+              selected: 1,
+              label: 'Studio',
+              input_html:  {class: 'form-control', style: 'width: 400px; margin-right: 50px;'}
 
-      .input-append{:id => "bookingdatepicker", :class => "control-group"}
-        = f.label "Date"
-        = f.input_field :date, :as => :string,
-          "data-format" => "yyyy-MM-dd"
+        .form-group
+          = f.label 'DATE'
+          .input-group{id: 'date_picker', class: 'date', style: 'width: 400px'}
+            = f.input_field :date, as: :string, class: 'form-control'
 
-        %span{:class=>"add-on"}
-          %i{'data-time-icon' => 'icon-time',
-          'data-date-icon' => 'icon-calendar'}
-        = f.error :date
+            %span{class: 'input-group-addon'}
+              %span{class: 'glyphicon glyphicon-calendar'}
 
-      .input-append{:id => "bookingstarttimepicker", :class => "control-group"}
-        = f.label "Start Time"
-        = f.input_field :start_time, :as => :string, "data-format" => "hh:mm",
-          :value => @booking.start_time ? @booking.start_time.strftime("%H:%M") : "17:00"
+      .form-inline
+        .form-group
+          = f.label 'START TIME'
+          .input-group{id: 'start_picker', class: 'date', style: 'width: 400px; margin-right: 50px;'}
+            = f.input_field :start_time, as: :string, class: 'form-control',
+              value: @booking.start_time ? @booking.start_time.strftime("%H:%M") : "17:00"
 
-        %span{:class=>"add-on"}
-          %i{'data-time-icon' => "icon-time", 'data-date-icon' => 'icon-calendar'}
-        = f.error :start_time
+            %span{class: 'input-group-addon'}
+              %span{class: 'glyphicon glyphicon-time'}
 
-      .input-append{:id=>"bookingendtimepicker"}
-        = f.label "End Time"
-        = f.input_field :end_time, :as => :string, "data-format" => "hh:mm",
-          :value => @booking.end_time ? @booking.end_time.strftime("%H:%M") : "23:30"
+        .form-group
+          = f.label 'END TIME'
+          .input-group{id: 'end_picker', class: 'date', style: 'width: 400px'}
+            = f.input_field :end_time, as: :string, class: 'form-control', 
+              value: @booking.end_time ? @booking.end_time.strftime("%H:%M") : "23:30"
 
-        %span{:class=>"add-on"}
-          %i{'data-time-icon' => 'icon-time', 'data-date-icon' => 'icon-calendar'}
-        = f.error :end_time
+            %span{:class=>"input-group-addon"}
+              %span{:class => "glyphicon glyphicon-time"}
 
-      = f.label "Webcast?"
-      = f.check_box :webcast
-      = f.input :availability_notes, :label => "Availability Notes",
-          :input_html => {:rows => 4, :cols => 80 }
+      %br
+
+      .form-group
+        .checkbox
+          %label
+            = f.check_box :webcast
+            Webcast Booking?
+
+      .form-group
+        = f.input :availability_notes, :label => "Availability Notes",
+            :input_html => {class: 'form-control', :rows => 6  }
 
       :javascript
         $(function() {
-          $('#bookingdatepicker').datetimepicker({ pickTime: false });
-          $('#bookingstarttimepicker').datetimepicker({ pickDate: false, pickSeconds: false  });
-          $('#bookingendtimepicker').datetimepicker({ pickDate: false, pickSeconds: false});
+          $('#date_picker').datetimepicker({format: "DD-MM-YY"});
+          $('#start_picker').datetimepicker({format: 'LT'});
+          $('#end_picker').datetimepicker({format: 'LT'});
         });
 
   .form-actions

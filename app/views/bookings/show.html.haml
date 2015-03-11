@@ -1,33 +1,44 @@
 - model_class = Booking
 
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human
+%h1 BOOKING
 
 %p{:id => "notice"}
   =notice
 
-%dl{:class => "dl-horizontal"}
-  %dt
-    %strong= "Project:"
-    %dd=@booking.project.project_name
-  %dt
-    %strong= "Date:"
-    %dd= @booking.date
-  %dt
-    %strong= "Start Time:"
-    %dd= @booking.start_time #.strftime "%H:%M"
-  %dt
-    %strong= "End Time:"
-    %dd= @booking.end_time #.strftime "%H:%M"
-  %dt
-    %strong= "Studio:"
-    %dd= StudioLookup.find(@booking.facility_studio).studio_name
-  %dt
-    %strong= Webcast?:"
-    %dd= @booking.webcast 
+.well.container
+  .row
+    .col-md-2
+      %strong PROJECT:
+    .col-md-2
+      = @booking.project.project_name
+  .row
+    .col-md-2
+      %strong DATE:
+    .col-md-2
+      = @booking.date
+  .row
+    .col-md-2
+      %strong START TIME:
+    .col-md-2
+      = @booking.start_time.strftime "%H:%M"
+  .row
+    .col-md-2
+      %strong END TIME:
+    .col-md-2
+      = @booking.end_time.strftime "%H:%M"
+  .row
+    .col-md-2
+      %strong STUDIO:
+    .col-md-2
+      = StudioLookup.studio_name_from_id(@booking.facility_studio)
+  .row
+    .col-md-2
+      %strong WEBCAST?:
+    .col-md-2
+      = @booking.webcast ? "YES" : "NO"
 
 = render :template => 'recordings/index', :locals => {:no_header => true}
-
+%hr
 = render :partial  => 'layouts/nav_form_actions',
   :locals => {:t_class => "booking",
   :path => [@project, @booking],

@@ -6,9 +6,9 @@ class BookingslotValidator < ActiveModel::EachValidator
     return false if record.nil? || attribute.nil?
 
     begin
-      # sqllite so no time diff hence jumping through hoops here
-      # note that if record.id = NULL and we pass that to the 
-      # query, we get nothing returned hence the tertiary.
+      # sqllite so no time diff hence jumping through hoops here  note that if
+      # record.id = NULL and we pass that to the query, we get nothing returned
+      # hence the ternary.
       possibly_conflicting = Booking.where(
                                "date = ? AND facility_studio = ? AND id != ?",
                                record.date, record.facility_studio, 
@@ -29,7 +29,7 @@ class BookingslotValidator < ActiveModel::EachValidator
       end
 
     rescue Exception => e
-      puts e
+      Logger.debug("Error validating Booking #{e}")
       return false
     end
     return true

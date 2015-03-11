@@ -4,19 +4,19 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project
 
-    unless (ppf=params[:ppf]).blank? 
+    unless (ppf=params[:ppf]).blank?
       if %w( today_pending today past present future ).include? ppf
         @projects = @projects.send(ppf.to_sym)
-      end 
+      end
     end
 
-    %w(studio client_name project_name).each do |k| 
+    %w(studio client_name project_name).each do |k|
       unless (val = params[k.to_sym]).blank?
         @projects = @projects.send(k.to_sym, val)
       end
     end
 
-    @projects = @projects.paginate(:page => params[:page], :per_page => PER_PAGE)
+    @projects = @projects.paginate(:page => params[:page])
 
     _simple_response(@projects, include: :bookings)
   end
@@ -24,9 +24,9 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
 
-    # Since show displays and renders the bookings view its neccessary to 
+    # Since show displays and renders the bookings view its neccessary to
     # create a *paginated* bookings object
-    @bookings = @project.bookings.paginate(:page => params[:page], :per_page => PER_PAGE)
+    @bookings = @project.bookings.paginate(:page => params[:page])
 
     # ??
 #    @client_login = @project.client_login
@@ -80,6 +80,10 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    _destroy_response([:projects])
+
+    respond_to do |format|
+      format.html { redirect_to projects_url }
+      format.json { head :no_content }
+    end
   end
 end

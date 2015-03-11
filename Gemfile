@@ -2,31 +2,38 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.18'
 gem 'sqlite3'
-gem 'foreigner'                             # Improved foreign key support
-gem 'devise'                                # authentication
-
+gem 'foreigner'
+gem 'devise'
 gem 'rack'
-gem 'rack-cors', :require => 'rack/cors'    # For cross origin resource sharing
+gem 'rack-cors', require: 'rack/cors'
+gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'haml'
+gem 'haml-rails'
+gem 'will_paginate'
+gem 'simple_form'
+gem 'awesome_nested_fields'
 
-# Gems used only for assets and not required in production environments by default.
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'jquery-rails'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails'
-  gem 'bootstrap-datetimepicker-rails'
+# Its important to note that this is the eonasdan datepicker fork at:
+# http://eonasdan.github.io/bootstrap-datetimepicker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+
+# Frustrated with never knowing which bloody version of bootstrap rails was
+# in use I pulled this CDN version. It has its own bugs and needs replacing.
+gem 'twitter-bootstrap-rails-cdn', path: 'vendor/twitter-bootstrap-rails-cdn'
+
+gem 'coffee-rails', '~> 3.2.1'
+gem 'therubyracer'
+gem 'uglifier', '>= 1.0.3'
+gem 'sass-rails',   '~> 3.2.3'
+gem 'jquery-rails'
+gem 'less-rails'
 
 group :development do
   gem 'single_test'
   gem 'awesome_print'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
-gem 'bcrypt-ruby', '~> 3.0.0'                # To use ActiveModel has_secure_password
-
-gem 'haml'
-gem 'haml-rails'
-gem 'will_paginate'
-gem "simple_form"
-gem 'awesome_nested_fields'
+gem 'test-unit'

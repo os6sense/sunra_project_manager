@@ -54,14 +54,15 @@ ActiveRecord::Schema.define(:version => 20130723094611) do
   end
 
   create_table "bookings", :force => true do |t|
-    t.string   "project_id",         :null => false
-    t.integer  "facility_studio",    :null => false
-    t.date     "date",               :null => false
-    t.datetime "start_time",         :null => false
-    t.datetime "end_time",           :null => false
+    t.string   "project_id",                            :null => false
+    t.integer  "facility_studio",                       :null => false
+    t.date     "date",                                  :null => false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "webcast",            :default => false
     t.text     "availability_notes"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
   end
 
   create_table "client_logins", :force => true do |t|

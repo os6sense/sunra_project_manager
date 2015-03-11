@@ -1,5 +1,5 @@
 - if object.errors.any?
-  .alert{:class => "alert-error"}
+  .alert{:class => "bg-danger"}
     %p= "Please correct the following #{pluralize(object.errors.count, 'error')}:"
     %ul
       - object.errors.full_messages.each do |msg|

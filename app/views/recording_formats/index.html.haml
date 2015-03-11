@@ -27,7 +27,9 @@
         %td= fmt.copy
         %td= fmt.encrypt
         %td= render :partial  => 'layouts/rec_form_actions',
-            :locals => {:t_class => "recording_format", :path => [@project, @booking, @recording, fmt]}
+          :locals => {:t_class => "recording_format", 
+                      :parent_path => [@project, @booking], 
+                      :path => [@project, @booking, @recording, fmt]}
 
 = link_to 'New Format',
     polymorphic_path([:new, @project, @booking, @recording, :recording_format]),

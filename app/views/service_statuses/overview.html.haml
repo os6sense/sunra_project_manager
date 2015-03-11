@@ -1,0 +1,35 @@
+%h1 SERVICE STATUS OVERVIEW
+
+.boxed
+  %b WARNING! YOU CAN BREAK THE SYSTEM BY PLAYING WITH THINGS ON THIS PAGE.
+  %p This page provides an overview of the running state of the system
+  %p and allows for services to be manually started/stopped. 
+ 
+.boxed
+  %h2{class: sl} FFMPEG RELAY SERVICE
+    %p  not attached to apache so I just need to know if its running or not. Can check pids in /tmp/sunra-ffserver-relay.lck
+
+.boxed
+  %h2{class: sl} RECORDING SERVICE
+    %p should be able to get the full url to the recording_service via # recording_service_rest_api_url
+
+    %form{ :action => "", :method => "post"}
+      %input{:type => "submit", :value => "MANUALLY START", :class => "btn"}
+
+    %form{ :action => "", :method => "post"}
+      %input{:type => "submit", :value => "MANUALLY STOP", :class => "btn"}
+
+.boxed
+  %h2{class: sl} UPLOADER SERVICE
+    %p uploader_service_url
+
+    %form{ :action => "", :method => "post"}
+      %input{:type => "submit", :value => "MANUALLY INITIATE UPLOAD", :class => "btn"}
+
+.boxed
+  %h2{class: sl} FAILSAFE RECORDING SERVICE
+    %p Review config
+
+.boxed 
+  %h2{class: sl} USB COPYING SERVICE
+

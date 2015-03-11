@@ -12,15 +12,10 @@ class BookingsController < ApplicationController
     return bookings
   end
 
-  #def nudge
-    #@booking = _get_parents(params[:id])
-    #@booking.nudge(params[:time])
-    #_simple_response(@booking, include: :recordings )
-  #end
-
   def index
-    @bookings = _get_parents()
+    @bookings = _get_parents
     @bookings = @bookings.paginate(:page => params[:page], :per_page => PER_PAGE)
+
     _simple_response(@bookings, include: [:recordings, :project] )
   end
 
@@ -51,8 +46,20 @@ class BookingsController < ApplicationController
   end
 
   def create
+    puts "CREATE"
     @project = Project.find(params[:project_id])
     @booking = @project.bookings.new(params[:booking])
+
+    # Okay we definately have a bug here - commented out before save to but
+    # I want to get up and running at this point
+    if @booking.start_time == nil
+      @booking.start_time = "#{@booking.date} #{params[:booking][:start_time]}"
+      @booking.end_time = "#{@booking.date} #{params[:booking][:end_time]}"
+    end
+
+    puts @booking.inspect
+    puts params[:booking]
+    puts "NEW"
 
     respond_to do |format|
       if @booking.save
@@ -82,6 +89,10 @@ class BookingsController < ApplicationController
   def destroy
     @booking = _get_parents(params[:id])
     @booking.destroy
-    _destroy_response([@project, @booking])
+
+    respond_to do |format|
+      format.html { redirect_to [@project] }
+      format.json { head :no_content }
+    end
   end
 end

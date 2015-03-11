@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-default navbar-admin" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">TOGGLE NAVIGATION</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="menu_header"><a href="<%= projects_path %>">PROJECTS</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle menu_header" data-toggle="dropdown">CONFIGURATION<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li><a href="">ADMINISTRATOR LOGINS</a></li>
+            <li><a href="<%= studio_lookups_path %>">STUDIO IDS</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" class="dropdown-toggle menu_header" data-toggle="dropdown">SERVICE STATUS<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="">OVERVIEW</a></li>
+            <li><a href="">RECORDING SERVICE</a></li>
+            <li><a href="">UPLOAD SERVICE</a></li>
+            <li><a href="">FAILSAFE SERVICE</a></li>
+            <li><a href="">COPY SERVICE</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="navbar-right">
+        <ul class="nav navbar-nav">
+          <li class="menu_header"><%= link_to "SIGN OUT (#{current_admin.email}) ",
+                          destroy_admin_session_path,
+                          :method => :delete %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+

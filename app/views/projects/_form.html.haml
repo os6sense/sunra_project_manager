@@ -1,9 +1,11 @@
-= simple_form_for @project, :html => {:class => 'form-inline'} do |f|
+= simple_form_for @project, :html => {:class => 'form-horizontal well'} do |f|
   = render "layouts/errors", :object => @project
 
-  = f.input :client_name, :label => "Client Name"
-  = f.input :project_name, :label => 'Project Name'
+  = f.input :client_name, :label => "CLIENT NAME"
+  = f.input :project_name, :label => 'PROJECT NAME'
 
+  <hr/>
   .form-actions
-    = f.button :submit, :class => 'btn btn-success'
-    = link_to "Cancel", :back, :class => 'btn btn-danger'
+    .btn-group
+      = f.button :submit, "CREATE", :class => 'btn btn-success'
+      = link_to "CANCEL", :back, :class => 'btn btn-warning'

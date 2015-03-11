@@ -6,7 +6,7 @@
       %th Start
       %th End
       %th Studio
-      %th= t '.actions', :default => t("helpers.actions")
+      %th BOOKING ACTIONS
   %tbody
     - @bookings.each do |booking|
       %tr
@@ -14,7 +14,16 @@
         %td= booking.date
         %td= booking.start_time.strftime "%H:%M"
         %td= booking.end_time.strftime "%H:%M"
-        %td= StudioLookup.find(booking.facility_studio).studio_name
+        %td= StudioLookup.studio_name_from_id(booking.facility_studio)
         %td
-          = render :partial  => 'layouts/rec_form_actions',
-            :locals => {:t_class => "booking", :path => [@project, booking]}
+          .btn-group
+            = link_to "VIEW BOOKING", [@project, booking],
+                        :class => 'btn btn-mini btn-primary'
+            = link_to "EDIT BOOKING",
+              edit_polymorphic_path([@project, booking]),
+                        :class => 'btn btn-mini btn-warning'
+            = link_to "DELETE BOOKING",
+              polymorphic_path([@project ? [@project, booking] : :bookings ]),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger'

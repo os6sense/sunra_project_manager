@@ -1,5 +1,8 @@
 SunraRestApi::Application.routes.draw do
 
+  resources :service_statuses
+
+
   devise_for :admins, :skip => [:registrations, :passwords],
     :token_authentication_key => 'authentication_key'
 
