@@ -12,31 +12,31 @@
               - if @failsafe_status[:capture]
                 .label.label-success 
                   FAILSAFE SERVICE: RUNNING
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
               - else 
                 .label.label-danger 
                   FAILSAFE SERVICE: DOWN
-                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
           .row.pull-right
             .col-md-3
               - if @failsafe_status[:lock_file]
                 .label.label-success 
                   LOCK FILE: FOUND
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
               - else
                 .label.label-danger
                   LOCK FILE: MISSING
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
           .row.pull-right
             .col-md-3
               - if @failsafe_status[:capture]
                 .label.label-success 
                   CAPTURE: IN PROGRESS
-                  %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-record', 'aria-hidden' => true}
               - else 
                 .label.label-danger 
                   CAPTURE: STOPPED
-                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
   .panel-body
     .row
       .col-md-4

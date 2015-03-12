@@ -13,31 +13,31 @@
               - if @relay_status[:lock_file]
                 .label.label-success 
                   LOCK FILE: FOUND
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
               - else
                 .label.label-danger
                   LOCK FILE: MISSING
-                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
           .row.pull-right
             .col-md-3
               - if @relay_status[:ffserver]
                 .label.label-success 
                   FFSERVER: RUNNING
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
               - else
                 .label.label-danger 
                   FFSERVER: DEAD
-                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
           .row.pull-right
             .col-md-3
               - if @relay_status[:capture]
                 .label.label-success 
                   CAPTURE PROCESS: RUNNING
-                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
               - else
                 .label.label-danger 
                   CAPTURE PROCESS: DEAD
-                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
   .panel-body
     .row
       .col-md-2

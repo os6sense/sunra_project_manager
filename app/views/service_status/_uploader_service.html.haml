@@ -12,20 +12,20 @@
             - if @uploader_status[:running]
               .label.label-success 
                 UPLOADER SERVICE: RUNNING
-                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
             - else 
               .label.label-danger 
                 UPLOADER SERVICE: DOWN
-                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
           .row.pull-right
             - if @uploader_status[:archive_server] == :up
               .label.label-success 
                 ARCHIVE SERVER: UP
-                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden' => true}
             - else 
               .label.label-danger 
                 ARCHIVE SERVER: DOWN
-                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden' => true}
  
   .panel-body
     .row
@@ -80,5 +80,5 @@
       .col-md-4
         %form{ :action => "", :method => "post"}
           %input{:type => "submit", :value => "MANUALLY INITIATE UPLOAD", :class => "btn btn-warning"}
-            %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+            %span{class: 'glyphicon glyphicon-record', 'aria-hidden' => true}
  
