@@ -1,17 +1,13 @@
 SunraRestApi::Application.routes.draw do
 
-  resources :service_statuses
+  devise_for :admins, skip: [:registrations, :passwords],
+                      token_authentication_key: 'authentication_key'
 
+  root to: 'projects#index'
 
-  devise_for :admins, :skip => [:registrations, :passwords],
-    :token_authentication_key => 'authentication_key'
+  #match '/404': 'errors#not_found'
+  #match '/500': 'errors#exception'
 
-  root :to => 'projects#index'
- 
-  match "/404" => "errors#not_found"
-  match "/500" => "errors#exception"
-
-  # Full nested heirarchy 
   resources :projects do
     resources :client_login
     resources :bookings do
@@ -21,20 +17,24 @@ SunraRestApi::Application.routes.draw do
     end
   end
 
-  # routes to provide top level "all" views of each table
-  resources :bookings do
-    resources :recordings
-  end
+  resources :service_status, controller: 'service_status',
+                             path_names: { index: 'overview' },
+                             only: [ :index ]
 
-  resources :recordings do
-    resources :recording_formats
-  end
+  #resources :bookings do
+    #resources :recordings
+  #end
+
+  #resources :recordings do
+    #resources :recording_formats
+  #end
 
   resources :recording_formats
   resources :studio_lookups
   resources :client_login
 
-  resources :quickproject, controller: 'projects', path_names: { new: 'quick'  }
+  resources :quickproject, controller: 'projects',
+                           path_names: { new: 'quick' }
 
   # currently unused
   resources :booking_contact_details
@@ -43,5 +43,4 @@ SunraRestApi::Application.routes.draw do
   resources :format_lookups
   resources :distribution_audits
   resources :file_ops_audits
-
 end

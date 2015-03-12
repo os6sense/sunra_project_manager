@@ -1,0 +1,63 @@
+%div{class: @failsafe_status[:capture] ? 'panel panel-success' : 'panel panel-danger'}
+  .panel-heading
+    .panel-title 
+      .row
+        .col-md-4
+          %h3 FAILSAFE SERVICE
+        .col-md-5
+          &nbsp;
+        .col-md-3
+          .row.pull-right
+            .col-md-3
+              - if @failsafe_status[:capture]
+                .label.label-success 
+                  FAILSAFE SERVICE: RUNNING
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+              - else 
+                .label.label-danger 
+                  FAILSAFE SERVICE: DOWN
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+          .row.pull-right
+            .col-md-3
+              - if @failsafe_status[:lock_file]
+                .label.label-success 
+                  LOCK FILE: FOUND
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+              - else
+                .label.label-danger
+                  LOCK FILE: MISSING
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+          .row.pull-right
+            .col-md-3
+              - if @failsafe_status[:capture]
+                .label.label-success 
+                  CAPTURE: IN PROGRESS
+                  %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+              - else 
+                .label.label-danger 
+                  CAPTURE: STOPPED
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+  .panel-body
+    .row
+      .col-md-4
+        &nbsp;
+    .row
+      .col-md-2
+        %b LATEST RECORDING
+      .col-md-10
+        = @failsafe_status[:latest_recording]
+    .row
+      .col-md-2
+        %b OLDEST RECORDING
+      .col-md-10
+        = @failsafe_status[:first_recording]
+    .row
+      .col-md-2
+        %b TOTAL RECORDINGS
+      .col-md-2
+        = @failsafe_status[:recording_count]
+      .col-md-2
+        %b TOTAL SIZE
+      .col-md-2
+        = "#{@failsafe_status[:recording_size]} MB"
+ 

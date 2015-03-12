@@ -1,0 +1,47 @@
+
+%div{class: @relay_status.values.all? ? 'panel panel-success' : 'panel panel-danger'}
+  .panel-heading
+    .panel-title 
+      .row
+        .col-md-4
+          %h3 FFMPEG RELAY SERVICE
+        .col-md-5
+          &nbsp;
+        .col-md-3
+          .row.pull-right
+            .col-md-3
+              - if @relay_status[:lock_file]
+                .label.label-success 
+                  LOCK FILE: FOUND
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+              - else
+                .label.label-danger
+                  LOCK FILE: MISSING
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+          .row.pull-right
+            .col-md-3
+              - if @relay_status[:ffserver]
+                .label.label-success 
+                  FFSERVER: RUNNING
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+              - else
+                .label.label-danger 
+                  FFSERVER: DEAD
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+          .row.pull-right
+            .col-md-3
+              - if @relay_status[:capture]
+                .label.label-success 
+                  CAPTURE PROCESS: RUNNING
+                  %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+              - else
+                .label.label-danger 
+                  CAPTURE PROCESS: DEAD
+                  %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+  .panel-body
+    .row
+      .col-md-2
+        %b UPTIME
+      .col-md-4
+        = "#{@relay_status[:uptime].round(0)} minutes"
+

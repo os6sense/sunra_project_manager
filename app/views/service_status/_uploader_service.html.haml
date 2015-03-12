@@ -1,0 +1,84 @@
+
+%div{class: @uploader_status[:running] ? 'panel panel-success' : 'panel panel-danger'}
+  .panel-heading
+    .panel-title 
+      .row
+        .col-md-4
+          %h3 UPLOADER SERVICE
+        .col-md-5
+          &nbsp;
+        .col-md-3
+          .row.pull-right
+            - if @uploader_status[:running]
+              .label.label-success 
+                UPLOADER SERVICE: RUNNING
+                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+            - else 
+              .label.label-danger 
+                UPLOADER SERVICE: DOWN
+                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+          .row.pull-right
+            - if @uploader_status[:archive_server] == :up
+              .label.label-success 
+                ARCHIVE SERVER: UP
+                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+            - else 
+              .label.label-danger 
+                ARCHIVE SERVER: DOWN
+                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+ 
+  .panel-body
+    .row
+
+    .row
+      .col-md-2
+        %b LOCAL
+      .col-md-2
+        = @uploader_status[:local] 
+    .row
+      .col-md-2
+        %b REMOTE
+      .col-md-2
+        = @uploader_status[:remote] 
+    .row
+      .col-md-2
+        %b BYTES WRITTEN
+      .col-md-2
+        = @uploader_status[:start_time] 
+      .col-md-2
+        %b SIZE
+      .col-md-2
+        = @uploader_status[:end_time] 
+      .col-md-2
+        %b COMPLETE?
+      .col-md-2
+        = @uploader_status[:end_time] 
+
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-12
+        %b PENDING
+    .row
+      .col-md-12
+        %table{class: 'table table-condensed'}
+          - @uploader_status[:pending].each do |p| 
+            %tr
+              %td= p[:project_name]
+              %td= p[:client_name]
+              %td= p[:base_filename]
+              %td= p[:format]
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-8
+      .col-md-4
+        %form{ :action => "", :method => "post"}
+          %input{:type => "submit", :value => "MANUALLY INITIATE UPLOAD", :class => "btn btn-warning"}
+            %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+ 

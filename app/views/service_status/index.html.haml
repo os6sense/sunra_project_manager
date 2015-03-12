@@ -1,0 +1,13 @@
+%h1 SERVICE STATUS OVERVIEW
+
+.alert.alert-warning
+  %b WARNING! YOU CAN BREAK THE SYSTEM BY PLAYING WITH THINGS ON THIS PAGE.
+ 
+
+= render 'relay_service', relay_status: @relay_status
+= render 'failsafe_service', failsafe_status: @failsafe_status
+= render 'recording_service', recording_status: @recording_status
+= render 'uploader_service', uploader_status: @uploader_status
+
+.panel 
+  %h2{class: 'sl'} USB COPYING SERVICE

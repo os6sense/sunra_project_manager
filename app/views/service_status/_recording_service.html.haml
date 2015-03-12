@@ -1,0 +1,83 @@
+%div{class: @recording_status[:running] ? 'panel panel-success' : 'panel panel-danger'}
+  .panel-heading
+    .panel-title 
+      .row
+        .col-md-4
+          %h3 RECORDING SERVICE
+        .col-md-5
+          &nbsp;
+        .col-md-3
+          .row.pull-right
+            - if @recording_status[:running]
+              .label.label-success 
+                RECORDING SERVICE: RUNNING
+                %span{class: 'glyphicon glyphicon-ok', 'aria-hidden': true}
+            - else 
+              .label.label-danger 
+                RECORDING SERVICE: DOWN
+                %span{class: 'glyphicon glyphicon-warning-sign', 'aria-hidden': true}
+
+  .panel-body
+    .row
+      .col-md-2
+        %b PROJECT ID
+      .col-md-2
+        = @recording_status[:project_id] 
+      .col-md-2
+        %b BOOKING ID
+      .col-md-2
+        = @recording_status[:booking_id] 
+      .col-md-2
+        %b STUDIO ID
+      .col-md-2
+        = @recording_status[:studio_id] 
+    .row
+      .col-md-2
+        %b START TIME
+      .col-md-2
+        = @recording_status[:start_time] 
+      .col-md-2
+        %b END TIME
+      .col-md-2
+        = @recording_status[:end_time] 
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-2
+        - if @recording_status[:is_recording]
+          .label.label-success 
+            RECORDING: IN PROGRESS
+            %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+        - else 
+          .label.label-info 
+            RECORDING: STOPPED
+            %span{class: 'glyphicon glyphicon-stop', 'aria-hidden': true}
+      .col-md-2
+        &nbsp;
+      - @recording_status[:recorders].each do |rec| 
+        .col-md-2
+          - if rec[1] == true
+            .label.label-success 
+              = "#{rec[0]}: RECORDING" 
+              %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+          - else
+            .label.label-info 
+              = "#{rec[0]}: STOPPED" 
+              %span{class: 'glyphicon glyphicon-stop', 'aria-hidden': true}
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-12
+        &nbsp;
+    .row
+      .col-md-8
+      .col-md-2
+        = link_to "FORCE START", "#{@recording_status[:start_url]}", remote: true, class: 'btn btn-warning'
+        %span{class: 'glyphicon glyphicon-record', 'aria-hidden': true}
+
+      .col-md-2
+        = link_to "FORCE STOP", "#{@recording_status[:stop_url]}", remote: true, class: 'btn btn-warning'
+
+ 

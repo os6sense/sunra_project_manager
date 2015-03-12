@@ -13,6 +13,11 @@ gem 'will_paginate'
 gem 'simple_form'
 gem 'awesome_nested_fields'
 
+
+gem 'sunra_utils', '~> 0.1.7', git: 'https://github.com/os6sense/sunra_utils.git'
+gem 'rest-client' # Only needed here since I forgot to add it as a dependancy
+                  # of sunra utils
+#
 # Its important to note that this is the eonasdan datepicker fork at:
 # http://eonasdan.github.io/bootstrap-datetimepicker
 gem 'momentjs-rails', '>= 2.9.0'

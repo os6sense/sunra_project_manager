@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/os6sense/sunra_utils.git
+  revision: a9f20905741df46b40daa3bbd79252923acd7e39
+  specs:
+    sunra_utils (0.1.8)
+      rest-client (~> 1.7.0)
+
 PATH
   remote: vendor/twitter-bootstrap-rails-cdn
   specs:
@@ -66,7 +73,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
-    execjs (2.3.0)
+    execjs (2.4.0)
     foreigner (1.7.2)
       activerecord (>= 3.0.0)
     haml (4.0.6)
@@ -96,6 +103,7 @@ GEM
     momentjs-rails (2.9.0)
       railties (>= 3.1)
     multi_json (1.11.0)
+    netrc (0.10.3)
     orm_adapter (0.5.0)
     polyglot (0.3.5)
     power_assert (0.2.3)
@@ -128,6 +136,9 @@ GEM
     ref (1.0.5)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.7.3)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     sass (3.4.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -150,7 +161,7 @@ GEM
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
@@ -184,10 +195,12 @@ DEPENDENCIES
   rack
   rack-cors
   rails (= 3.2.18)
+  rest-client
   sass-rails (~> 3.2.3)
   simple_form
   single_test
   sqlite3
+  sunra_utils (~> 0.1.7)!
   test-unit
   therubyracer
   twitter-bootstrap-rails-cdn!
