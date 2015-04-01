@@ -18,6 +18,7 @@
       %th= t '.actions', :default => t("helpers.actions")
 
     - @recording_formats = [] if @recording_formats.nil?
+
     - @recording_formats.each do |fmt|
       %tr
         %td= FormatLookup.where(id: fmt.format)[0][:extension]
