@@ -64,7 +64,7 @@ class BookingsController < ApplicationController
     respond_to do |format|
       if @booking.save
         format.html { redirect_to polymorphic_path([@project, @booking]) , notice: 'Booking was successfully created.' }
-        format.json { render json: [@project, @booking], status: :created, location: @booking }
+        format.json { render json: [@project, @booking], status: :created, location: [@project, @booking] }
       else
         format.html { render action: "new" }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
