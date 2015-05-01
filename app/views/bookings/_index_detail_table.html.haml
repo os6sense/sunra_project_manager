@@ -1,29 +1,37 @@
-%table{:class => "table "}
+
+%table{:class => "table"}
   %thead
-    %tr
-      %th Project
-      %th Date
-      %th Start
-      %th End
-      %th Studio
-      %th BOOKING ACTIONS
+    %tr{class: 'row'}
+      %th{class: 'col-md-4'} Project
+      %th{class: 'col-md-1'} Date
+      %th{class: 'col-md-1'} Start
+      %th{class: 'col-md-1'} End
+      %th{class: 'col-md-5'} Booking Actions 
   %tbody
     - @bookings.each do |booking|
-      %tr
-        %td= booking.project.project_name
-        %td= booking.date
-        %td= booking.start_time.strftime "%H:%M"
-        %td= booking.end_time.strftime "%H:%M"
-        %td= StudioLookup.studio_name_from_id(booking.facility_studio)
-        %td
+      %tr{class: 'row'}
+        %td{class: 'col-md-4'}= booking.project.project_name
+        %td{class: 'col-md-1'}= booking.date
+        %td{class: 'col-md-1'}= booking.start_time.strftime "%H:%M"
+        %td{class: 'col-md-1'}= booking.end_time.strftime "%H:%M"
+        %td{class: 'col-md-5'}
           .btn-group
-            = link_to "VIEW BOOKING", [@project, booking],
-                        :class => 'btn btn-mini btn-primary'
-            = link_to "EDIT BOOKING",
+            = link_to "VIEW", [@project, booking],
+                        :class => 'btn btn-mini btn-primary ls w_146'
+            = link_to "CHANGE",
               edit_polymorphic_path([@project, booking]),
-                        :class => 'btn btn-mini btn-warning'
-            = link_to "DELETE BOOKING",
+                        :class => 'btn btn-mini btn-warning ls w_146'
+            = link_to "DELETE",
               polymorphic_path([@project ? [@project, booking] : :bookings ]),
                         :method => :delete,
                         :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-mini btn-danger'
+                        :class => 'btn btn-mini btn-danger ls w_146'
+
+    %tr{class: 'row'}
+      %td{class: 'col-md-4'}
+      %td{class: 'col-md-1'}
+      %td{class: 'col-md-1'}
+      %td{class: 'col-md-1'}
+      %td{class: 'col-md-5'}
+        .digg_pagination.pull-right{style: 'margin-right: 5px'}
+          = will_paginate @bookings, :container => false 
