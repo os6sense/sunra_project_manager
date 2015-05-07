@@ -16,16 +16,11 @@
         %td{class: 'col-md-1'}= booking.end_time.strftime "%H:%M"
         %td{class: 'col-md-5'}
           .btn-group
-            = link_to "VIEW", [@project, booking],
-                        :class => 'btn btn-mini btn-primary ls w_146'
-            = link_to "CHANGE",
+            = link_to "VIEW BOOKING", [@project, booking],
+                        :class => 'btn btn-mini btn-primary ls w_220'
+            = link_to "EDIT BOOKING",
               edit_polymorphic_path([@project, booking]),
-                        :class => 'btn btn-mini btn-warning ls w_146'
-            = link_to "DELETE",
-              polymorphic_path([@project ? [@project, booking] : :bookings ]),
-                        :method => :delete,
-                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                        :class => 'btn btn-mini btn-danger ls w_146'
+                        :class => 'btn btn-mini btn-warning ls w_220'
 
     %tr{class: 'row'}
       %td{class: 'col-md-4'}

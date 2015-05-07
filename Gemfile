@@ -13,6 +13,7 @@ gem 'will_paginate'
 gem 'simple_form'
 gem 'awesome_nested_fields'
 
+gem 'draper'
 
 gem 'sunra_utils', '~> 0.1.7', git: 'https://github.com/os6sense/sunra_utils.git'
 gem 'rest-client' # Only needed here since I forgot to add it as a dependancy
@@ -35,6 +36,7 @@ gem 'jquery-rails'
 gem 'less-rails'
 
 group :development do
+  gem 'guard-livereload', '~> 2.4', require: false
   gem 'single_test'
   gem 'awesome_print'
   gem 'better_errors'

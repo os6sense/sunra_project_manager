@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title><%= content_for?(:title) ? yield(:title) : "[SOWHAT] Sunra Session Booking & Management Interface" %></title>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+    <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
+  <![endif]-->
+
+  <!-- was 3.1.1 -->
+  <%= twitter_bootstrap_stylesheet_link_tag :netdna, force: true, version: '3.3.4' %>
+
+  <!-- was 1.11.0 -->
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+  <%= twitter_bootstrap_javascript_include_tag :netdna, force: true, version: '3.3.4' %>
+
+
+  <%= javascript_include_tag "application" %>
+
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <%= csrf_meta_tags %>
+
+  <%= yield(:head) %>
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+          data-target=".navbar-collapse">
+          <span class="sr-only">TOGGLE NAVIGATION</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">
+          <%= image_tag("header_sowhat_logo.png", alt:"So What? Research",
+                        width:"269", height:"56",class:"noborder") %>
+        </a>
+        <div id="navbar-logo-text">
+          Market Research Studios<br />and Workshop Facilities.
+        </div>
+      </div>
+      <div class="navbar-collapse collapse">
+        <div id="contact-info" class="navbar-right" itemscope>
+          <a id="tel" href="tel:+442032741099"
+            itemprop="telephone">tel: +44 (0) 203 274 1099
+          </a>
+          <a id="mail" itemprop="email"
+            href="mailto:info@sowhatresearch.co.uk">info@sowhatresearch.co.uk
+          </a>
+        </div>
+      </div><!--/.navbar-collapse -->
+    </div>
+  </div>
+
+  <%= render partial: "shared/admin_nav_bar" if admin_signed_in? %>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+  <div id="footer" class="navbar" style="margin-bottom:0px;margin-left:0px;margin-right:0px;clear:both;">
+    <div class="container">
+      <p class="pull-right"></p>
+    </div>
+  </div>
+</body>
+</html>

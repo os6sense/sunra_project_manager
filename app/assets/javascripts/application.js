@@ -10,19 +10,13 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
 //= require jquery_ujs
-//
-// require twitter/bootstrap
-// require bootstrap
-//
-//= require jquery.nested-fields
 //
 //= require moment
 //= require bootstrap-datetimepicker
 //
 // require_tree .
 //
-$(document).ready(function(e) {
-  $('FORM').nestedFields();
-});
+//$(document).ready(function(e) {
+  //$('FORM').nestedFields();
+//});

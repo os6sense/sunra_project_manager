@@ -8,9 +8,11 @@ SunraRestApi::Application.routes.draw do
   #match '/404': 'errors#not_found'
   #match '/500': 'errors#exception'
 
+  get 'search', controller: 'projects'
   resources :projects do
     resources :client_login
     resources :bookings do
+      post :mark, on: :member
       resources :recordings do
         resources :recording_formats
       end
@@ -21,20 +23,13 @@ SunraRestApi::Application.routes.draw do
                              path_names: { index: 'overview' },
                              only: [ :index ]
 
-  #resources :bookings do
-    #resources :recordings
-  #end
-
-  #resources :recordings do
-    #resources :recording_formats
-  #end
-
   resources :recording_formats
   resources :studio_lookups
   resources :client_login
 
   resources :quickproject, controller: 'projects',
                            path_names: { new: 'quick' }
+
 
   # currently unused
   resources :booking_contact_details

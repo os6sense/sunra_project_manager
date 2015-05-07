@@ -1,81 +1,82 @@
-- model_class = Project
-
-.container
-  .row
-    .col-md-2
-      %h1 PROJECTS
-
 .container.boxed.well
   .row
-    .col-md-2
-      %b{class: 'ls'} SEARCH: 
-    .col-md-5
-      
-    .col-md-2
+    .col-md-12
+      .ls.h3 PROJECTS
+  .row
+    .col-md-7
+      %form{action: "search", method: 'get', class: 'form-inline'}
+        .form-group
+          .input-group
+            %input{name: 'search', type: 'text', 
+              class: 'form-control', 
+              id: 'search',
+              placeholder: 'Search by client or project name, or by date',
+              value: params[:search]}
+
+            %a{href: projects_url, class: 'input-group-addon'}
+              .span{class: "glyphicon glyphicon-remove"} 
+    
+    .col-md-1
+    .col-md-4
       = link_to "CREATE NEW PROJECT", 
-        new_project_path, class: 'btn btn-danger ls w_440'
+          new_project_path, 
+          class: 'btn btn-danger ls w_440 pull-right',
+          style: 'margin-right: -10px'
 
-%br
-%br
-
-%table{class: 'table'}
-  %thead
-    %tr
-      %th CLIENT
-      %th PROJECT
-      %th DATE
-      %th START
-      %th END
-      %th STUDIO
-      %th ACTIONS
-  %tbody
-    -@projects.each do |project|
+.table-responsive
+  %table{class: 'table container boxed well'}
+    %thead
       %tr
-        %td= link_to project.client_name, polymorphic_path(project)
-        %td= link_to project.project_name, polymorphic_path(project)
+        %th CLIENT
+        %th PROJECT
+        %th DATE
+        %th START
+        %th END
+        %th
+    %tbody
+      -@projects.each do |project|
+        %tr
+          %td= link_to project.client_name, polymorphic_path(project)
+          %td= link_to project.project_name, polymorphic_path(project)
 
 
-        -project.bookings.each do |booking|
-          - booking_detail = capture do
-            %td= booking.date
-            %td= booking.start_time.strftime "%H:%M"
-            %td= booking.end_time.strftime "%H:%M"
-            %td= StudioLookup.studio_name_from_id(booking.facility_studio)
+          -project.bookings.each do |booking|
+            - booking_detail = capture do
+              %td= booking.date
+              %td= booking.start_time.strftime "%H:%M"
+              %td= booking.end_time.strftime "%H:%M"
 
-          -# we want to compact projects so that the booking details
-          -# appear alongside the project but we dont want to repeat
-          -# the project name.
-          -if booking != project.bookings.first
-            %tr
-              %td
-              %td
+            -# we want to compact projects so that the booking details
+            -# appear alongside the project but we dont want to repeat
+            -# the project name.
+            -if booking != project.bookings.first
+              %tr
+                %td
+                %td
+                =booking_detail
+                %td
+            -else
               =booking_detail
               %td
-          -else
-            =booking_detail
+                .btn-group.pull-right
+                  = link_to "VIEW BOOKINGS", project_path(project),
+                              :class => 'btn btn-mini btn-primary ls w_220'
+                  = link_to "EDIT PROJECT", edit_polymorphic_path(project),
+                              :class => 'btn btn-mini btn-warning ls w_220'
+
+          -# If we have a project without any bookings we want to provide 
+          -# controls
+          - if project.bookings.size == 0
+            - (1..3).each do
+              %td
             %td
               .btn-group.pull-right
-                = link_to "VIEW BOOKINGS", project_path(project),
-                            :class => 'btn btn-mini btn-primary ls w_220'
-                = link_to "EDIT PROJECT", edit_polymorphic_path(project),
+                = link_to "ADD BOOKINGS", project_path(project),
+                            :class => 'btn btn-mini btn-success ls w_220'
+                = link_to "EDIT PROJECT",
+                            edit_polymorphic_path(project),
                             :class => 'btn btn-mini btn-warning ls w_220'
-
-        -# If we have a project without any bookings we want to provide 
-        -# controls
-        - if project.bookings.size == 0
-          - (1..4).each do
-            %td
-          %td
-            .btn-group.pull-right
-              = link_to "ADD BOOKINGS", project_path(project),
-                          :class => 'btn btn-mini btn-success ls w_220'
-              = link_to "EDIT PROJECT",
-                          edit_polymorphic_path(project),
-                          :class => 'btn btn-mini btn-warning ls w_220'
-
-.container
-  .row
-    .col-md-2
-    .col-md-10.pull-right
-      .digg_pagination
-        = will_paginate @projects, :container => false 
+      %tr
+        %td{colspan: 6}
+          .digg_pagination.pull-right{style: 'margin-right: 0px'}
+            = will_paginate @projects, :container => false 

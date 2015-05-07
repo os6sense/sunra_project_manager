@@ -21,7 +21,7 @@ class RecordingFormat < ActiveRecord::Base
 
   # ==== Description
   # If params contains upload, copy, encrypt return the matching list of
-  # formats
+  # formats which are marked for the particular action to occur.
   def self.action_list(params)
     if params[:upload]
       return RecordingFormat.to_upload(params[:studio_id])
@@ -40,7 +40,6 @@ class RecordingFormat < ActiveRecord::Base
   def fix_format(fmt_string)
     # NB: Bug with format not being set on deployed system @format worked
     # fine in development but self.format was required on deployed system.
-    #
     if fmt_string.to_i > 0
       self.format = fmt_string.to_i
     elsif (ext = FormatLookup.where(extension: fmt_string.upcase)[0])

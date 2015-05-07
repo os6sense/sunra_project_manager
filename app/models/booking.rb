@@ -33,7 +33,7 @@ class Booking < ActiveRecord::Base
 
   default_scope order 'date DESC, start_time DESC'
 
-  scope :today, ->(limit = 100) { where(date: Date.today) }
+  scope :today, ->(_limit = 100) { where(date: Date.today) }
   scope :past, lambda{ where('date < ?', Date.today) }
   scope :future, ->(limit = 100) { where('date > ?', Date.today) }
 
@@ -41,11 +41,12 @@ class Booking < ActiveRecord::Base
   # Ensure the date in the start and end times match the booking date
   # Add 1 second to the booking when creating for the first time
   def before_save
-    puts "******** before save"
-    #self.start_time += 1.second if self.created_at.nil?
-    #self.start_time = "#{self.date} #{self.start_time.to_time}"
-    #self.end_time = "#{self.date} #{self.end_time.to_time}"
-    puts self.start_time
+    self.start_time += 1.second if self.created_at.nil?
+  end
+
+  def set_times(params)
+    self.start_time = "#{self.date} #{params[:booking][:start_time]}"
+    self.end_time = "#{self.date} #{params[:booking][:end_time]}"
   end
 
   # ==== Description

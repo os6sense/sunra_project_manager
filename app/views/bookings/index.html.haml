@@ -1,22 +1,18 @@
-- model_class = Booking
 
 - unless defined?(no_header)
   .page-header
-    %h1 BOOKINGS
 - else
-  %h4 BOOKINGS
   %p= "No bookings exist for this project" if @bookings.size == 0
+
 - if @bookings.size > 0
   = render :template => "bookings/_index_detail_table", :locals => {:no_header => true}
 
-  =will_paginate(@bookings, :style => "color:blue;float:right;")
 
-.container
-  .row
-    .col-md-2
-      = link_to 'MANUALLY CREATE BOOKING',
-          polymorphic_path([:new, @project, :booking]),
-          :class => 'btn btn-mini btn-danger' if @project
-    .col-md-10.pull-right
-      .digg_pagination
-        = will_paginate @bookings, :container => false 
+.table-responsive
+  %table{class: ''}
+    %tr{class: 'row'}
+      %td{class: 'col-md-7'}
+      %td{class: 'col-md-4'}
+        = link_to 'CREATE NEW BOOKING',
+            polymorphic_path([:new, @project, :booking]),
+            :class => 'btn btn-mini btn-danger w_440' if @project

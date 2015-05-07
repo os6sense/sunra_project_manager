@@ -7,7 +7,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %meta{:content => "", :name => "description"}/
     %meta{:content => "", :name => "author"}/
-    %title= content_for?(:title) ? yield(:title) : "[SOWHAT] Sunra Session Booking & Management Interface"
+    %title= content_for?(:title) ? yield(:title) : "SUNRA Session Management Interface"
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     /[if lt IE 9]
       <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
@@ -25,24 +25,22 @@
     .navbar.navbar-inverse.navbar-fixed-top
       .container
         .navbar-header
-          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+          %button.navbar-toggle{'data-target': '.navbar-collapse', 'data-toggle': 'collapse', type: 'button'}
             %span.sr-only TOGGLE NAVIGATION
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand{:href => "/"}
-            = image_tag("header_sowhat_logo.png", alt:"So What? Research", |
-              width:"269", height:"56",class:"noborder")                   |
+            = image_tag('sunratmp.png', alt: 'SUNRA TEMPORARY LOGO', width:"269", height:"56",class:"noborder")
           #navbar-logo-text
-            Market Research Studios
-            %br>/
-            and Workshop Facilities.
+            .ls.text-left{style: 'color: white; font-size: 18px;' }
+              SUNRA
+            .ls{style: 'color: white;' }
+              Secure Usable Networked Recording Appliance
         .navbar-collapse.collapse
-          #contact-info.navbar-right{:itemscope => ""}
-            %a#tel{:href => "tel:+442032741099", :itemprop => "telephone"}
-              tel: +44 (0) 203 274 1099
-            %a#mail{:href => "mailto:info@sowhatresearch.co.uk", :itemprop => "email"}
-              info@sowhatresearch.co.uk
+          #contact-info.navbar-right{itemscope: ""}
+            %a#mail{href: 'mailto:leej@sunra.io', 'hidden': true, itemprop: 'email'}
+              leej@sunra.io
         / /.navbar-collapse
     = render partial: "shared/admin_nav_bar" if admin_signed_in?
     .container

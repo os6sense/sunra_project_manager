@@ -18,8 +18,19 @@ td a { color: #000000; }
   box-shadow: none;
 }
 
+.large_cb {
+  width:30px;
+  height:30px;
+}
+
+.studio_title {
+    color: white; 
+    padding-top: 25px; 
+    text-shadow: red 0.1em 0.1em 0.2em;
+}
+
 .menu_header, .ls { letter-spacing: 6px; }
-th, h1 { letter-spacing: 6px; }
+/* th, h1 { letter-spacing: 6px; } */
 
 body { padding-bottom: 10px; }
 
@@ -29,8 +40,12 @@ body { padding-bottom: 10px; }
 .w_40 { width: 40px; }
 .w_50 { width: 50px; }
 .w_100 { width: 100px; }
+.w_146 { width: 146px; }
+.w_150 { width: 150px; }
 .w_200 { width: 200px; }
 .w_220 { width: 220px; }
+.w_300 { width: 300px; }
+.w_400 { width: 400px; }
 .w_440 { width: 440px; }
 
 .td_5 { width: 5% }

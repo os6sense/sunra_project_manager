@@ -5,12 +5,8 @@ class Project < ActiveRecord::Base
   self.primary_key = :uuid
   self.per_page = 10
 
-  has_many :bookings,
-              dependent: :delete_all,
-              order: 'date ASC'
-
-  has_one :client_login,
-              dependent: :destroy
+  has_many :bookings, dependent: :delete_all, order: 'date DESC'
+  has_one :client_login, dependent: :destroy
 
   validates_associated :bookings
 
@@ -51,6 +47,11 @@ class Project < ActiveRecord::Base
                 :conditions => {'projects.client_name' => client_name } }
   scope :project_name, lambda { |project_name|  self.scoped :include => :bookings,
                 :conditions => {'projects.project_name' => project_name } }
+
+  def self.user_search(term)
+    where("PROJECT_NAME LIKE ? OR CLIENT_NAME LIKE ? or DATE = ?", "%#{term}%", "%#{term}%", term)
+  end
+
   # Description::
   # Use a uuid as the primary key
   def after_initialize

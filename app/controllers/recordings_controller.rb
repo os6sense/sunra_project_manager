@@ -5,8 +5,6 @@ class RecordingsController < ApplicationController
     if params[:booking_id]
       @project = Project.find(params[:project_id])
       @booking = @project.bookings.find(params[:booking_id])
-      #@booking = Booking.find(params[:booking_id])
-      #@project = @booking.project
       recordings = r_id ? @booking.recordings.find(r_id) : @booking.recordings.all
     else
       recordings = r_id ? Recording.find(r_id) : Recording.all
@@ -45,11 +43,13 @@ class RecordingsController < ApplicationController
     @booking = @project.bookings.find(params[:booking_id])
     @recording = @booking.recordings.new(params[:recording])
 
+    @recording.parse_times(params)
+
     respond_to do |format|
       if @recording.save
         format.html { redirect_to polymorphic_path([@project, @booking, @recording]),
                       notice: 'Recording was successfully created.' }
-        format.json { render json: [@project, @booking, @recording], 
+        format.json { render json: [@project, @booking, @recording],
                       status: :created, location: [@project, @booking, @recording] }
       else
         format.html { render action: "new" }
@@ -61,8 +61,11 @@ class RecordingsController < ApplicationController
   def update
     @recording = _get_parents(params[:id])
 
+    @recording.update_attributes(params[:recording])
+    @recording.parse_times(params)
+
     respond_to do |format|
-      if @recording.update_attributes(params[:recording])
+      if @recording.save
         format.html { redirect_to polymorphic_path([@project, @booking, @recording]),
                       notice: 'Recording was successfully updated.' }
         format.json { head :no_content }

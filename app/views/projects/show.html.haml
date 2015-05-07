@@ -1,35 +1,34 @@
-- model_class = Project
-
-.container
+.container.boxed.well
   .row
-    .col-md-12
-      %h1 PROJECT: #{@project.project_name}
-  .row
+    .col-md-7
+      .row
+        .col-md-4
+          %h3{class: 'ls'} PROJECT: 
+        .col-md-8
+          %h3{class: 'ls'} #{@project.project_name}
+      .row
+        .col-md-4
+          %h5{class: 'ls'} CLIENT NAME:
+        .col-md-8
+          %h4{class: 'ls'} #{@project.client_name}
     .col-md-5
-      %strong CLIENT NAME
-      = @project.client_name
-    .col-md-5
-      .btn-group
-        = link_to "BACK TO INDEX",
-          [Project], :class => 'btn btn-success'
-        = link_to "EDIT PROJECT",
-                    edit_polymorphic_path(@project), :class => 'btn btn-warning'
-        = link_to "DELETE PROJECT",
+      .row{style: 'margin-bottom: 10px;'}
+        = link_to 'BACK TO PROJECTS', 
+                  projects_url,
+                  :class => 'btn btn-success ls w_440'
+      .row{style: 'margin-bottom: 10px;'}
+        = link_to 'EDIT PROJECT', 
+                  edit_polymorphic_path(@project), 
+                  :class => 'btn btn-warning ls w_440'
+      .row
+        = link_to 'DELETE PROJECT',
                     polymorphic_path(@project),
                     :method => 'delete',
                     :data => { :confirm => t('.confirm',
                                :default => t("helpers.links.confirm",
                                :default => 'Are you sure?')) },
-                    :class => 'btn btn-danger'
-    .col-md-2
-      &nbsp;
-      
+                    :class => 'btn btn-danger ls w_440'
 
-%hr
-.bookings{ :style => "width: 80%;" }
-  = render :template => 'bookings/index', :locals => {:no_header => true}
-
-.login
-  = #render :template => 'client_login/index', :locals => {:no_header => true}
-
-
+.container.boxed.well
+  .bookings 
+    = render :template => 'bookings/index', :locals => {:no_header => true}

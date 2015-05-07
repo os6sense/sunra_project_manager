@@ -1,45 +1,147 @@
-- model_class = Booking
+.container.boxed.well
+  .row
+    .col-md-7
+      .row
+        .col-md-4
+          %h3{class: 'ls'} PROJECT: 
+        .col-md-8
+          %h3{class: 'ls'} #{@project.project_name}
+      .row
+        .col-md-4
+          %h5{class: 'ls'} CLIENT NAME:
+        .col-md-8
+          %h4{class: 'ls'} #{@project.client_name}
+    .col-md-5
+      .row{style: 'margin-bottom: 10px;'}
+        = link_to 'BACK TO PROJECT', 
+                  project_url(@project),
+                  :class => 'btn btn-success ls w_440'
+      .row{style: 'margin-bottom: 10px;'}
+        = link_to 'EDIT BOOKING', edit_polymorphic_path([@project, @booking]), 
+                  :class => 'btn btn-warning ls w_440'
+      .row
+        = link_to 'DELETE BOOKING', polymorphic_path([@project, @booking]),
+                    :method => 'delete',
+                    :data => { :confirm => t('.confirm',
+                               :default => t("helpers.links.confirm",
+                               :default => 'Are you sure?')) },
+                    :class => 'btn btn-danger ls w_440'
 
-%h1 BOOKING
+- if notice
+  .container.boxed.well.ls
+    .row
+      .col-md-12
+        %p{:id => "notice"}
+          =notice
 
-%p{:id => "notice"}
-  =notice
-
-.well.container
+.container.boxed.well.ls
   .row
     .col-md-2
-      %strong PROJECT:
-    .col-md-2
-      = @booking.project.project_name
+      %h4= "BOOKING" 
+    .col-md-2 
+      %h4= "#{@project.bookings.index(@booking) + 1} of #{@project.bookings.length}"
+    .col-md-3
+      %h4 OTHER DATES:
+    .col-md-5{style: 'margin-top: 6px; margin-bottom: 6px;'}
+      - @project.bookings.each do | booking |
+        - unless booking == @booking
+          %a{href: project_booking_url(@project, booking)} 
+            = booking.date.to_s(:hyphenated_date)
+  .row
+    .col-md-12
+      %hr
   .row
     .col-md-2
-      %strong DATE:
+      %h5 DATE:
+    .col-md-5{style: 'margin-top: 6px; margin-bottom: 6px;'}
+      = @booking.date.to_s(:hyphenated_date)
     .col-md-2
-      = @booking.date
+      %h5 START TIME:
+    .col-md-2{style: 'margin-top: 6px; margin-bottom: 6px;'}
+      = @booking.start_time.to_s(:short)
+    .row
+      .col-md-7
+      .col-md-2
+        %h5 END TIME:
+      .col-md-2{style: 'margin-top: 6px; margin-bottom: 6px;'}
+        = @booking.end_time.to_s(:short)
   .row
     .col-md-2
-      %strong START TIME:
-    .col-md-2
-      = @booking.start_time.strftime "%H:%M"
-  .row
-    .col-md-2
-      %strong END TIME:
-    .col-md-2
-      = @booking.end_time.strftime "%H:%M"
-  .row
-    .col-md-2
-      %strong STUDIO:
-    .col-md-2
+      %h5 STUDIO:
+    .col-md-4{style: 'margin-top: 6px; margin-bottom: 6px;'}
       = StudioLookup.studio_name_from_id(@booking.facility_studio)
   .row
     .col-md-2
-      %strong WEBCAST?:
-    .col-md-2
+      %h5 WEBCAST?:
+    .col-md-2{style: 'margin-top: 6px; margin-bottom: 6px;'}
       = @booking.webcast ? "YES" : "NO"
 
-= render :template => 'recordings/index', :locals => {:no_header => true}
-%hr
-= render :partial  => 'layouts/nav_form_actions',
-  :locals => {:t_class => "booking",
-  :path => [@project, @booking],
-  :root =>[@project ? @project : :bookings] }
+  .row
+    .col-md-2
+      %h5 RECORDINGS:
+    .col-md-5{style: 'margin-top: 6px; margin-bottom: 6px;'}
+      = @booking.recordings.length 
+      %a{id: 'rec_detail', href: '#'}
+        (... detail)
+    .col-md-5
+      - if @booking.recordings.length > 0
+        #upload_tmp.btn.btn-success.ls.w_440
+          UPLOAD ALL
+  #recordings.hidden
+    .row
+      .col-md-12
+        %hr
+    .row
+      .col-md-12
+        = render :template => 'recordings/index', :locals => {:no_header => true}
+
+.modal.fade{ id: 'myModal', tabindex: '-1', role: 'dialog', 'aria-labelledby': 'myModalLabel', 'aria-hidden': 'true'}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{type: 'button', class: 'close', 'data-dismiss': 'modal', 'aria-label': 'Close'}
+          %span{'aria-hidden': 'true'} &times;
+        %h4{class:'modal-title'} UPLOAD ALL RECORDINGS
+      .modal-body
+        %form.container
+          .row
+            .col-md-1
+              %input{type: 'checkbox', id: 'mp3_cb', checked: true, style: 'width:40px; height:40px;'}
+            .col-md-1
+              %label.ls{for: 'mp3_cb'} AUDIO (MP3)
+            .col-md-1
+            .col-md-1
+              %input{type: 'checkbox', name: 'mp4_cb', id: 'mp4_cb', style: 'width:40px; height:40px;'}
+            .col-md-1
+              %label.ls{for: 'mp4_cb'} VIDEO (MP4)
+          .row{style: 'margin-top: 40px; padding-bottom: 5px;'}
+            .col-md-1
+              %input{type: 'checkbox', name: 'immediate_cb', id: 'immediate_cb', style: 'width:20px; height:20px;'}
+            .col-md-3
+              %label.ls{for: 'immediate_cb'}
+                .small
+                  IMMEDIATE UPLOAD?
+          .col-md-1
+      .modal-footer
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss': "modal"} CANCEL
+        &nbsp;
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss': "modal"} UPLOAD
+
+:javascript
+  $('#rec_detail').on('click', function (e) {
+    $('#recordings').toggleClass('hidden')
+  });
+
+  $('#upload_tmp').on('click', function (e) {
+    $('#myModal').modal('toggle'); 
+
+    //$.post("22/mark", {
+    //    rec_formats: "MP3",
+    //    action: "upload"
+    //  },
+    //  function(data, status){
+    //      alert("Data: " + data + "\nStatus: " + status);
+    //  });
+  });
+
+

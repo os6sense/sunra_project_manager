@@ -1,11 +1,27 @@
-= simple_form_for @project, :html => {:class => 'form-horizontal well'} do |f|
-  = render "layouts/errors", :object => @project
-
-  = f.input :client_name, :label => "CLIENT NAME"
-  = f.input :project_name, :label => 'PROJECT NAME'
-
-  <hr/>
+= simple_form_for @project, html: {class: 'form-horizontal'} do |f|
+  .row
+    .col-md-12
+      = render "layouts/errors", object: @project
+  .row
+    .col-md-12
+      %hr
+  .form-group
+    .col-md-3
+      = f.label :client_name, 'CLIENT NAME', class: 'ls'
+    .col-md-8
+      = f.input_field :client_name, 
+                     class: 'form-control', 
+                     placeholder: 'Enter name of client or company.'
+  .form-group
+    .col-md-3
+      = f.label :project_name, 'PROJECT NAME', class: 'ls'
+    .col-md-8
+      = f.input_field :project_name, 
+                      class: 'form-control', 
+                      placeholder: 'Enter name or title for project. '
   .form-actions
-    .btn-group
-      = f.button :submit, "CREATE", :class => 'btn btn-success'
-      = link_to "CANCEL", :back, :class => 'btn btn-warning'
+    .col-md-3
+    .col-md-8
+      .btn-group
+        = f.button :submit, "CREATE", :class => 'btn btn-success ls w_150'
+        = link_to "CANCEL", projects_url, :class => 'btn btn-warning ls w_150'

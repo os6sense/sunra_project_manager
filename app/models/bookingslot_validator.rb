@@ -1,5 +1,5 @@
 # Description::
-# Ensures that no booking is created which overlaps with the date and time 
+# Ensures that no booking is created which overlaps with the date and time
 # of another booking
 class BookingslotValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
@@ -11,7 +11,7 @@ class BookingslotValidator < ActiveModel::EachValidator
       # hence the ternary.
       possibly_conflicting = Booking.where(
                                "date = ? AND facility_studio = ? AND id != ?",
-                               record.date, record.facility_studio, 
+                               record.date, record.facility_studio,
                                record.id ? record.id : 0).all
 
       possibly_conflicting.each do |booking|
@@ -29,7 +29,7 @@ class BookingslotValidator < ActiveModel::EachValidator
       end
 
     rescue Exception => e
-      Logger.debug("Error validating Booking #{e}")
+      #Logger.debug("Error validating Booking #{e}")
       return false
     end
     return true

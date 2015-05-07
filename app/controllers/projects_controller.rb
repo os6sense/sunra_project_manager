@@ -4,33 +4,40 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project
 
+    # Allows for the display of either only bookings today, from the past,
+    # or future.
     unless (ppf=params[:ppf]).blank?
       if %w( today_pending today past present future ).include? ppf
         @projects = @projects.send(ppf.to_sym)
       end
     end
 
+    # I have no idea where I used this - TODO!
     %w(studio client_name project_name).each do |k|
       unless (val = params[k.to_sym]).blank?
         @projects = @projects.send(k.to_sym, val)
       end
     end
 
-    @projects = @projects.paginate(:page => params[:page])
-
+    @projects = @projects.paginate(page: params[:page], per_page: 11)
     _simple_response(@projects, include: :bookings)
   end
 
+
+  def search
+    # Allow for a custom search.
+    unless params[:search].blank?
+      @projects = Project.user_search(params[:search])
+    end
+
+    @projects = @projects.paginate(page: params[:page], per_page: 11)
+    render :index
+  end
+
+
   def show
     @project = Project.find(params[:id])
-
-    # Since show displays and renders the bookings view its neccessary to
-    # create a *paginated* bookings object
-    @bookings = @project.bookings.paginate(:page => params[:page])
-
-    # ??
-#    @client_login = @project.client_login
-
+    @bookings = @project.bookings.paginate(page: params[:page], per_page: 7)
     _simple_response @project
   end
 
