@@ -43,5 +43,5 @@
       .col-md-2
         %b UPTIME
       .col-md-4
-        = "#{@relay_status[:uptime].round(0)} minutes"
+        = "#{(@relay_status[:uptime] || 0).round(0)} minutes"
 
