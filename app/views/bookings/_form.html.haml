@@ -17,7 +17,7 @@
         = f.input_field :date, 
                         as: :string, 
                         class: 'form-control',
-                        value: (@booking.date ? @booking.date : DateTime.now).to_s(:hyphenated_date)
+                        value: (@booking.date ? @booking.date : DateTime.now.utc).to_s(:hyphenated_date)
 
         %span{class: 'input-group-addon'}
           %span{class: 'glyphicon glyphicon-calendar'}
