@@ -24,7 +24,7 @@ class ServiceStatus
 
     status[:capture] = Sunra::Utils::PS::pid_exists?(lock_file.capture_pid)
     status[:ffserver] = Sunra::Utils::PS::pid_exists?(lock_file.ffserver_pid)
-    status[:uptime] = (Time.now.utc - File.mtime(config.lock_file))/60
+    status[:uptime] = (Time.now - File.mtime(config.lock_file))/60
 
     status
   end
