@@ -36,6 +36,7 @@ gem 'jquery-rails'
 gem 'less-rails'
 
 group :development do
+  gem 'quiet_assets'
   gem 'guard-livereload', '~> 2.4', require: false
   gem 'single_test'
   gem 'awesome_print'

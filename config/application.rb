@@ -13,6 +13,7 @@ end
 module SunraRestApi
 
   class Application < Rails::Application
+
     # Enable JSON exceptions
     config.exceptions_app = self.routes
 
