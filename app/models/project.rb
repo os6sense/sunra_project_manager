@@ -31,15 +31,15 @@ class Project < ActiveRecord::Base
     .order('bookings.date DESC, bookings.start_time ASC')
 
   scope :today_pending, lambda { self.scoped :include => :bookings,
-                        :conditions => ["bookings.date = ? AND bookings.end_time > ?", Date.today, Time.zone.now] }
+                        :conditions => ["bookings.date = ? AND bookings.end_time > ?", Date.today, Time.now] }
   scope :present, lambda { self.scoped :include => :bookings,
-                        :conditions => ["bookings.start_time < ? AND bookings.end_time > ?", Time.zone.now, Time.zone.now] }
+                        :conditions => ["bookings.start_time < ? AND bookings.end_time > ?", Time.now, Time.now] }
   scope :today, lambda { self.scoped :include => :bookings,
                          :conditions => ["bookings.date = ?", Date.today] }
   scope :past, lambda { self.scoped :include => :bookings,
-                        :conditions => [ "bookings.end_time < ?", Time.zone.now ] }
+                        :conditions => [ "bookings.end_time < ?", Time.now ] }
   scope :future, lambda { self.scoped :include => :bookings,
-                        :conditions => [ "bookings.start_time > ? ",  Time.zone.now ] }
+                        :conditions => [ "bookings.start_time > ? ",  Time.now ] }
 
   scope :studio, lambda { |studio_id|  self.scoped :include => :bookings,
                 :conditions => {'bookings.facility_studio' => studio_id } }
