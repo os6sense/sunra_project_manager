@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/os6sense/sunra_utils.git
-  revision: a9f20905741df46b40daa3bbd79252923acd7e39
+  revision: cb19b045954d9b996eeb28157d33ff6a59bdf7db
   specs:
-    sunra_utils (0.1.8)
+    sunra_utils (0.1.92)
       rest-client (~> 1.7.0)
 
 PATH
@@ -155,6 +155,8 @@ GEM
     rack-cache (1.2)
       rack (>= 0.4)
     rack-cors (0.4.0)
+    rack-mini-profiler (0.9.3)
+      rack (>= 1.1.3)
     rack-ssl (1.3.4)
       rack
     rack-test (0.6.3)
@@ -249,6 +251,7 @@ DEPENDENCIES
   quiet_assets
   rack
   rack-cors
+  rack-mini-profiler
   rails (= 3.2.18)
   rest-client
   sass-rails (~> 3.2.3)

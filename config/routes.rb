@@ -8,6 +8,8 @@ SunraRestApi::Application.routes.draw do
   #match '/404': 'errors#not_found'
   #match '/500': 'errors#exception'
 
+  resources :admins
+
   get 'search', controller: 'projects'
   resources :projects do
     resources :client_login
