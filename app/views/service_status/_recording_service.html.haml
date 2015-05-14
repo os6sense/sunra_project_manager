@@ -74,10 +74,10 @@
     .row
       .col-md-8
       .col-md-2
-        = link_to "FORCE START", "#{@recording_status[:start_url]}", remote: true, class: 'btn btn-warning'
+        = link_to "FORCE START", "#{@recording_status[:start_url]}", remote: true, class: 'btn btn-danger'
         %span{class: 'glyphicon glyphicon-record', 'aria-hidden' => true}
 
       .col-md-2
-        = link_to "FORCE STOP", "#{@recording_status[:stop_url]}", remote: true, class: 'btn btn-warning'
+        = link_to "FORCE STOP", "#{@recording_status[:stop_url]}", remote: true, class: 'btn btn-danger'
 
  

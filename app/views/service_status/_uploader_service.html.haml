@@ -78,7 +78,9 @@
     .row
       .col-md-8
       .col-md-4
-        %form{ :action => "", :method => "post"}
-          %input{:type => "submit", :value => "MANUALLY INITIATE UPLOAD", :class => "btn btn-warning"}
-            %span{class: 'glyphicon glyphicon-record', 'aria-hidden' => true}
+        %button{id: 'upload_btn', type: 'button', class: 'btn btn-warning', 'data-dismiss': 'modal'} MANUALLY INITIATE UPLOAD
  
+:javascript 
+  $('#upload_btn').on('click', function (e) {
+    $.get( "http://localhost/uploader_service/manual_start", function( data ) { } );
+  });
