@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       end
     end
 
-    @projects = @projects.paginate(page: params[:page], per_page: 11)
+    @projects = @projects.paginate(page: params[:page], per_page: 10)
     _simple_response(@projects, include: :bookings)
   end
 
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
       @projects = Project.user_search(params[:search])
     end
 
-    @projects = @projects.paginate(page: params[:page], per_page: 11)
+    @projects = @projects.paginate(page: params[:page], per_page: 10)
     render :index
   end
 

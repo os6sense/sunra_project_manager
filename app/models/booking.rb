@@ -70,4 +70,22 @@ class Booking < ActiveRecord::Base
 
     self.update_attribute(:end_time, self.end_time + nudge_by_minutes )
   end
+
+  # given a string representation of the format e.g. MP3, mark that
+  # format for upload by the uploader_service.
+  def mark_for_upload(rec_formats)
+    return if rec_formats.blank?
+
+    # rec_formats will be of the form ['MP3', 'MP4'], convert to id
+    rec_formats.map! { | rf | FormatLookup.where(extension: rf.upcase)[0].id }
+
+    recordings.each do | rec |
+      rec.recording_formats.each do | rf |
+        if rec_formats.include?(rf.format)
+          rf.upload = true
+          rf.save!
+        end
+      end
+    end
+  end
 end

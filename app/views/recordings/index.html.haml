@@ -2,18 +2,20 @@
   %thead
     %tr
       - if @recordings.length > 0
-        %th{class: 'col-md-2'} Start
-        %th{class: 'col-md-2'} End
+        %th{class: 'col-md-1'} Start
+        %th{class: 'col-md-1'} End
         %th{class: 'col-md-1'} #
         %th{class: 'col-md-2'} Filename
+        %th{class: 'col-md-1'} 
         %th{class: 'col-md-5'}
 
     - @recordings.each do |recording|
       %tr
-        %td= recording.start_time.strftime "%H:%M:%S"
-        %td= recording.end_time != nil ? recording.end_time.strftime("%H:%M:%S") : "--:--:--"
+        %td= recording.start_time.strftime "%H:%M"
+        %td= recording.end_time != nil ? recording.end_time.strftime("%H:%M") : "--:--:--"
         %td= recording.group_number
         %td= recording.base_filename
+        %td= ""
         %td
           .btn-group
             = link_to "VIEW",

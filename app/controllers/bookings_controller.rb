@@ -1,5 +1,7 @@
 # BookingsController
-#
+require 'sunra_utils/config/uploader'
+require "sunra_utils/rest_client"
+
 class BookingsController < ApplicationController
 
   # _get_parents allow for multiple routes - /bookings would show all
@@ -20,10 +22,35 @@ class BookingsController < ApplicationController
     _simple_response(@bookings, include: [:recordings, :project])
   end
 
-  # API endpoint intended for AJAX calls
+  # API endpoint intended for AJAX calls - marks the recording_formats
+  # for upload and then starts the uploader service IF passed an immediate
+  # value of true in the parameters.
   def mark
     @booking = _get_parents(params[:id])
-    @booking.mark_for_upload(params[:rec_formats], params[:mark_action])
+    @booking.mark_for_upload(params[:rec_formats])
+
+    # if there is an immediate param set to true, call the uploader
+    # service manual upload url.
+    start_uploader_service if !params[:immediate].blank? && params[:immediate] == 'true'
+
+    respond_to do |format|
+      format.html { render inline: 'ok' }
+      format.json { head :no_content }
+    end
+  end
+
+  # performs a call to the uploader service
+  # Not really the place for this
+  def start_uploader_service
+    config = Sunra::Utils::Config::Uploader
+    puts config.uploader_service_url
+    begin
+      rc = Sunra::Utils::RestClient.new(config.uploader_service_url)#), '', '')
+      rc.get('manual_start')
+    rescue
+      return false
+    end
+    return true
   end
 
   def show

@@ -123,9 +123,9 @@
                   IMMEDIATE UPLOAD?
           .col-md-1
       .modal-footer
-        %button{type: 'button', class: 'btn btn-default', 'data-dismiss': "modal"} CANCEL
+        %button{type: 'button', class: 'btn btn-default', 'data-dismiss': 'modal'} CANCEL
         &nbsp;
-        %button{type: 'button', class: 'btn btn-default', 'data-dismiss': "modal"} UPLOAD
+        %button{id: 'upload_btn', type: 'button', class: 'btn btn-default', 'data-dismiss': 'modal'} UPLOAD
 
 :javascript
   $('#rec_detail').on('click', function (e) {
@@ -135,13 +135,21 @@
   $('#upload_tmp').on('click', function (e) {
     $('#myModal').modal('toggle'); 
 
-    //$.post("22/mark", {
-    //    rec_formats: "MP3",
-    //    action: "upload"
-    //  },
-    //  function(data, status){
-    //      alert("Data: " + data + "\nStatus: " + status);
-    //  });
   });
 
+  $('#upload_btn').on('click', function (e) {
+    var formats = [];
+    $('#mp4_cb').is(":checked") ? formats.push("MP4") : '';
+    $('#mp3_cb').is(":checked") ? formats.push("MP3") : '';
 
+    $.post("#{@booking.id}/mark", {
+        rec_formats: formats,
+        immediate: $('#immediate_cb').is(':checked') ? true : false
+      },
+      function(data, status){
+          //alert("Data: " + data + "\nStatus: " + status);
+    });
+
+    $.get( "http://localhost/uploader_service/manual_start", function( data ) { } );
+
+  });
