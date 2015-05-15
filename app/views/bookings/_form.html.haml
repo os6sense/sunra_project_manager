@@ -8,9 +8,10 @@
         = f.input_field :facility_studio, as: :string,
                         id: 'facility_studio',
                         readonly: true,
-                        value: "#{SunraRestApi::Application::config.studio_name}", 
+                        value: "#{SunraRestApi::Application::config.studio_name.upcase}", 
                         class: 'form-control'
 
+        = f.input :facility_studio, as: :hidden, input_html: { value: "#{SunraRestApi::Application::config.studio_id}" }
     .col-md-6
       %label{for: 'booking_date', class: 'ls'} DATE
       .input-group{id: 'date_picker', class: 'date' }
