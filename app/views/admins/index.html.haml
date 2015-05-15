@@ -1,0 +1,28 @@
+.container.boxed.well
+  .row
+    .col-md-7
+    .col-md-5
+      = link_to 'CREATE NEW ADMIN', new_admin_path, class: 'btn btn-warning ls w_440' if current_admin.id == 1
+
+%table{class: 'table container boxed well '}
+  %tr
+    %th ID
+    %th EMAIL
+    %th LAST LOGIN
+    %th IP
+    %th
+  - @admins.each do | admin |
+    %tr
+      %td= admin.id
+      %td= admin.email
+      %td= admin.last_sign_in_at
+      %td= admin.last_sign_in_ip
+      %td
+        .btn-group.pull-right
+          - if current_admin.id == 1
+            = link_to 'EDIT', edit_admin_path(admin), class: 'btn btn-warning ls w_220' 
+            = link_to 'DESTROY', admin, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger w_220 ls' if admin.id > 1
+          - else
+            &nbsp;
+%br/
+
