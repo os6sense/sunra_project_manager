@@ -1,6 +1,15 @@
 = simple_form_for(@admin) do |f|
-  .form-inputs
-    = f.input :email
-    = f.input :password
-  .form-actions
-    = f.button :submit
+  .row
+    .col-md-12
+      = f.input :email
+  .row
+    .col-md-12
+      = f.input :password
+  .row
+  .row
+    .col-md-7
+    .col-md-5
+      .btn-group
+        = f.button :submit, "CREATE ADMIN", class: 'btn btn-danger ls w_220'
+        = link_to 'BACK', admins_path, class: 'btn btn-success ls w_220'
+
